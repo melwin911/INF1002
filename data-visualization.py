@@ -9,6 +9,17 @@ df = pd.read_csv("data.csv")
 # View the first 5 rows
 # print(df.head())
 
-# Horizontal bar graph showing count of 'town'
-# sns.countplot(y='town', data = df)
+# Bar graph showing count of 'town'
+# sns.countplot(x='town', data = df)
+# plt.xticks(rotation=90)
+# plt.show()
+
+# Bar graph showing count of 'flat_type'
+# sns.countplot(x='flat_type', data = df)
+# plt.xticks(rotation=90)
+# plt.show()
+
+# Bar graph showing count of 'flat_model'
+# sns.countplot(x='flat_model', data = df)
+# plt.xticks(rotation=90)
 # plt.show()
