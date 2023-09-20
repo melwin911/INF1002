@@ -64,7 +64,7 @@ df = pd.read_csv("sorted_output.csv")
 # plt.show()
 
 # running slow, requires optimization (sub-categorize year and resale price)
-# Scatter Plot showing x = 'resale_price', y = 'month' (yaer) 
+# Scatter Plot showing y = 'resale_price', x = 'month' (yaer) 
 
 # extract the first 4 char of 'month' to get year. eg. 1990
 # x_axis = df['month'].str[:4]
@@ -80,7 +80,7 @@ df = pd.read_csv("sorted_output.csv")
 # plt.ticklabel_format(style='plain', axis='y')
 # plt.show()
 
-# Scatter Plot showing x = 'resale_price 'x = 'lease_commence_date', 
+# Scatter Plot showing y = 'resale_price 'x = 'lease_commence_date', 
 
 # x_axis = df['lease_commence_date']
 
@@ -95,7 +95,7 @@ df = pd.read_csv("sorted_output.csv")
 # plt.ticklabel_format(style='plain', axis='y')
 # plt.show()
 
-# Scatter Plot showing x = 'resale_price 'x = 'flat_type', 
+# Scatter Plot showing y = 'resale_price 'x = 'flat_type', 
 
 # x_axis = df['flat_type']
 
@@ -105,6 +105,21 @@ df = pd.read_csv("sorted_output.csv")
 # plt.title('Resale Price and flat type')
 # plt.xlabel('Year')
 # plt.xticks(rotation=90)
+# plt.ylabel('Resale Price')
+
+# # remove scientific notation
+# plt.ticklabel_format(style='plain', axis='y')
+# plt.show()
+
+# Scatter Plot showing x = 'resale_price 'x = 'floor_area_sqm', 
+
+# x_axis = df['floor_area_sqm']
+
+# y_axis = df['resale_price']
+# plt.scatter(x_axis, y_axis)
+
+# plt.title('Resale Price and floor area sqm')
+# plt.xlabel('Floor Area Sqm')
 # plt.ylabel('Resale Price')
 
 # # remove scientific notation
