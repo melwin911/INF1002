@@ -4,7 +4,7 @@ import pandas as pd
 import seaborn as sns
 
 # Read the CSV file
-df = pd.read_csv("data.csv")
+df = pd.read_csv("sorted_output.csv")
 
 # View the first 5 rows
 # print(df.head())
