@@ -133,3 +133,7 @@ df = pd.read_csv("sorted_output.csv")
 # # remove scientific notation
 # plt.ticklabel_format(style='plain', axis='y')
 # plt.show()
+
+# extract data from 2011(?) onwards
+# change "month" column to "year"
+# one hot encode "town"
