@@ -4,7 +4,7 @@ import pandas as pd
 import seaborn as sns
 
 # Read the CSV file
-df = pd.read_csv("sorted_output.csv")
+# df = pd.read_csv("sorted_output.csv")
 
 # View the first 5 rows
 # print(df.head())
@@ -34,7 +34,7 @@ df = pd.read_csv("sorted_output.csv")
 # plt.show()
 
 # Bar graph showing count of 'year'
-# sns.countplot(x=df['month'], data = df)
+# sns.countplot(x=df['year'], data = df)
 # plt.title('Count of Year')
 # plt.xlabel('Year')
 # plt.xticks(rotation=90)
@@ -73,9 +73,9 @@ df = pd.read_csv("sorted_output.csv")
 # plt.show()
 
 # running slow, requires optimization (sub-categorize year and resale price)
-# Scatter Plot showing y = 'resale_price', x = 'month' (yaer) 
+# Scatter Plot showing y = 'resale_price', x = 'year' 
 
-# x_axis = df['month']
+# x_axis = df['year']
 
 # y_axis = df['resale_price']
 # plt.scatter(x_axis, y_axis)
@@ -84,7 +84,7 @@ df = pd.read_csv("sorted_output.csv")
 # plt.xlabel('Year')
 # plt.ylabel('Resale Price')
 
-# # # remove scientific notation
+# # # # remove scientific notation
 # plt.ticklabel_format(style='plain', axis='y')
 # plt.show()
 
@@ -135,5 +135,23 @@ df = pd.read_csv("sorted_output.csv")
 # plt.show()
 
 # extract data from 2011(?) onwards
-# change "month" column to "year"
 # one hot encode "town"
+
+
+df = pd.read_csv("2012_onwards_sorted_output.csv")
+
+# running slow, requires optimization (sub-categorize year and resale price)
+# Scatter Plot showing y = 'resale_price', x = 'year' 
+
+x_axis = df['year']
+
+y_axis = df['resale_price']
+plt.scatter(x_axis, y_axis)
+
+plt.title('Resale Price over years')
+plt.xlabel('Year')
+plt.ylabel('Resale Price')
+
+# # # remove scientific notation
+plt.ticklabel_format(style='plain', axis='y')
+plt.show()
