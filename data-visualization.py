@@ -134,24 +134,21 @@ import seaborn as sns
 # plt.ticklabel_format(style='plain', axis='y')
 # plt.show()
 
-# extract data from 2011(?) onwards
-# one hot encode "town"
-
 
 df = pd.read_csv("2012_onwards_sorted_output.csv")
 
 # running slow, requires optimization (sub-categorize year and resale price)
 # Scatter Plot showing y = 'resale_price', x = 'year' 
 
-x_axis = df['year']
+# x_axis = df['year']
 
-y_axis = df['resale_price']
-plt.scatter(x_axis, y_axis)
+# y_axis = df['resale_price']
+# plt.scatter(x_axis, y_axis)
 
-plt.title('Resale Price over years')
-plt.xlabel('Year')
-plt.ylabel('Resale Price')
+# plt.title('Resale Price over years')
+# plt.xlabel('Year')
+# plt.ylabel('Resale Price')
 
-# # # remove scientific notation
-plt.ticklabel_format(style='plain', axis='y')
-plt.show()
+# # # # remove scientific notation
+# plt.ticklabel_format(style='plain', axis='y')
+# plt.show()
