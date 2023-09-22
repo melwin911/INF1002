@@ -11,27 +11,31 @@ df = pd.read_csv("sorted_output.csv")
 
 # Bar graph showing count of 'town'
 # sns.countplot(x='town', data = df)
+# plt.title('Count of Town')
 # plt.xticks(rotation=90)
 # plt.show()
 
 # Bar graph showing count of 'flat_type'
 # sns.countplot(x='flat_type', data = df)
+# plt.title('Count of Flat Type')
 # plt.xticks(rotation=90)
 # plt.show()
 
 # Bar graph showing count of 'flat_model'
 # sns.countplot(x='flat_model', data = df)
+# plt.title('Count of Flat Model')
 # plt.xticks(rotation=90)
 # plt.show()
 
 # Bar graph showing count of 'storey_range'
 # sns.countplot(x='storey_range', data = df)
+# plt.title('Count of Storey Range')
 # plt.xticks(rotation=90)
 # plt.show()
 
 # Bar graph showing count of 'year'
-# extract the first 4 char of 'month' to get year. eg. 1990
-# sns.countplot(x=df['month'].str[:4], data = df)
+# sns.countplot(x=df['month'], data = df)
+# plt.title('Count of Year')
 # plt.xlabel('Year')
 # plt.xticks(rotation=90)
 # plt.show()
@@ -39,35 +43,39 @@ df = pd.read_csv("sorted_output.csv")
 # Bar graph showing count of 'street_name'
 # requires one hot encoding to categorize streets
 # sns.countplot(x='street_name', data = df)
+# plt.title('Count of Street Name')
 # plt.xticks(rotation=90)
 # plt.show()
 
 # Bar graph showing count of 'storey_range'
 # sns.countplot(x='storey_range', data = df)
+# plt.title('Count of Storey Range')
 # plt.xticks(rotation=90)
 # plt.show()
 
-# Bar graph showing count of 'storey_range'
+# Bar graph showing count of 'floor_area_sqm'
 # sns.countplot(x='floor_area_sqm', data = df)
+# plt.title('Count of Floor Area Sqm')
 # plt.xticks(rotation=90)
 # plt.show()
 
 # Bar graph showing count of 'lease_commence_date'
 # sns.countplot(x='lease_commence_date', data = df)
+# plt.title('Count of Lease Commence Date')
 # plt.xticks(rotation=90)
 # plt.show()
 
 # running slow, requires optimization (sub-categorize resale price)
 # Bar graph showing count of 'resale_price'
 # sns.countplot(x='resale_price', data = df)
+# plt.title('Count of Resale Price')
 # plt.xticks(rotation=90)
 # plt.show()
 
 # running slow, requires optimization (sub-categorize year and resale price)
 # Scatter Plot showing y = 'resale_price', x = 'month' (yaer) 
 
-# extract the first 4 char of 'month' to get year. eg. 1990
-# x_axis = df['month'].str[:4]
+# x_axis = df['month']
 
 # y_axis = df['resale_price']
 # plt.scatter(x_axis, y_axis)
@@ -76,7 +84,7 @@ df = pd.read_csv("sorted_output.csv")
 # plt.xlabel('Year')
 # plt.ylabel('Resale Price')
 
-# # remove scientific notation
+# # # remove scientific notation
 # plt.ticklabel_format(style='plain', axis='y')
 # plt.show()
 
@@ -91,7 +99,7 @@ df = pd.read_csv("sorted_output.csv")
 # plt.xlabel('Year')
 # plt.ylabel('Resale Price')
 
-# # remove scientific notation
+# # # remove scientific notation
 # plt.ticklabel_format(style='plain', axis='y')
 # plt.show()
 
@@ -107,7 +115,7 @@ df = pd.read_csv("sorted_output.csv")
 # plt.xticks(rotation=90)
 # plt.ylabel('Resale Price')
 
-# # remove scientific notation
+# # # remove scientific notation
 # plt.ticklabel_format(style='plain', axis='y')
 # plt.show()
 
