@@ -135,7 +135,7 @@ import seaborn as sns
 # plt.show()
 
 
-df = pd.read_csv("2012_onwards_sorted_output.csv")
+# df = pd.read_csv("2012_onwards_sorted_output.csv")
 
 # running slow, requires optimization (sub-categorize year and resale price)
 # Scatter Plot showing y = 'resale_price', x = 'year' 
@@ -152,3 +152,24 @@ df = pd.read_csv("2012_onwards_sorted_output.csv")
 # # # # remove scientific notation
 # plt.ticklabel_format(style='plain', axis='y')
 # plt.show()
+
+# print(df['town'].unique())
+# print(len(df['town'].unique()))
+
+
+# ohe_town = pd.get_dummies(df["town"]).astype(int)
+
+# df = pd.concat([df, ohe_town], axis="columns")
+
+# print(df)
+
+# ohe_df = 'ohe_df.csv'
+
+# df.to_csv(ohe_df, index=False)
+
+# print('Merged CSV file saved at:', ohe_df)
+
+
+df = pd.read_csv("ohe_df.csv")
+
+print(df)
