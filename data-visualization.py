@@ -5,7 +5,7 @@ import seaborn as sns
 from sklearn.preprocessing import LabelEncoder
 
 # Read the CSV file
-df = pd.read_csv("sorted_output.csv")
+# df = pd.read_csv("sorted_output.csv")
 
 # View the first 5 rows
 # print(df.head())
@@ -69,10 +69,12 @@ df = pd.read_csv("sorted_output.csv")
 # plt.xticks(rotation=90)
 # plt.show()
 
+# running slow, requires optimization (sub-categorize resale price)
 # Bar graph showing count of 'resale_price'
-sns.histplot(df["resale_price"])
-plt.ticklabel_format(style='plain', axis='x')
-plt.show()
+# sns.countplot(x='resale_price', data = df)
+# plt.title('Count of Resale Price')
+# plt.xticks(rotation=90)
+# plt.show()
 
 # running slow, requires optimization (sub-categorize year and resale price)
 # Scatter Plot showing y = 'resale_price', x = 'year' 
@@ -86,7 +88,7 @@ plt.show()
 # plt.xlabel('Year')
 # plt.ylabel('Resale Price')
 
-#  remove scientific notation
+# # # # remove scientific notation
 # plt.ticklabel_format(style='plain', axis='y')
 # plt.show()
 
@@ -139,6 +141,8 @@ plt.show()
 
 df = pd.read_csv("2012_onwards_sorted_output.csv")
 
+df1 = pd.read_csv("ouput.csv")
+
 # running slow, requires optimization (sub-categorize year and resale price)
 # Scatter Plot showing y = 'resale_price', x = 'year' 
 
@@ -172,15 +176,19 @@ df = pd.read_csv("2012_onwards_sorted_output.csv")
 # print('Merged CSV file saved at:', ohe_df)
 
 # Label encoding does not produce new features unlike OHE, but ML models may misinterpret numbers for hierachy.
-labelEncoder = LabelEncoder()
-df["le_town"] = labelEncoder.fit_transform(df["town"])
-le_df = 'le_df.csv'
-df.to_csv(le_df, index=False)
+
 # print('Merged CSV file saved at:', le_df)
 
-df = pd.read_csv("le_df.csv")
-# corr_matrix = df.corr(numeric_only=True)
-# sns.heatmap(corr_matrix, annot=True)
-# plt.show()
+'''labelEncoder = LabelEncoder()
+df["le_town"] = labelEncoder.fit_transform(df["town"])
+le_df = 'le_df.csv'
+df.to_csv(le_df, index=False)'''
 
+corr_matrix = df1.corr(numeric_only=True)
+k = 7
+cols = corr_matrix.nlargest(k, 'resale_price')['resale_price'].index
+cm = np.corrcoef(df1[cols].values.T)
+sns.set(font_scale=1.25)
+hm = sns.heatmap(cm,  fmt='.2f', annot=True, annot_kws={'size': 10}, yticklabels=cols.values, xticklabels=cols.values)
 
+plt.show()
