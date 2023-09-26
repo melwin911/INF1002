@@ -5,7 +5,7 @@ import seaborn as sns
 from sklearn.preprocessing import LabelEncoder
 
 # Read the CSV file
-# df = pd.read_csv("sorted_output.csv")
+df = pd.read_csv("sorted_output.csv")
 
 # View the first 5 rows
 # print(df.head())
@@ -69,12 +69,10 @@ from sklearn.preprocessing import LabelEncoder
 # plt.xticks(rotation=90)
 # plt.show()
 
-# running slow, requires optimization (sub-categorize resale price)
 # Bar graph showing count of 'resale_price'
-# sns.countplot(x='resale_price', data = df)
-# plt.title('Count of Resale Price')
-# plt.xticks(rotation=90)
-# plt.show()
+sns.histplot(df["resale_price"])
+plt.ticklabel_format(style='plain', axis='x')
+plt.show()
 
 # running slow, requires optimization (sub-categorize year and resale price)
 # Scatter Plot showing y = 'resale_price', x = 'year' 
@@ -88,7 +86,7 @@ from sklearn.preprocessing import LabelEncoder
 # plt.xlabel('Year')
 # plt.ylabel('Resale Price')
 
-# # # # remove scientific notation
+#  remove scientific notation
 # plt.ticklabel_format(style='plain', axis='y')
 # plt.show()
 
@@ -181,6 +179,8 @@ df.to_csv(le_df, index=False)
 # print('Merged CSV file saved at:', le_df)
 
 df = pd.read_csv("le_df.csv")
-corr_matrix = df.corr(numeric_only=True)
-sns.heatmap(corr_matrix, annot=True)
-plt.show()
+# corr_matrix = df.corr(numeric_only=True)
+# sns.heatmap(corr_matrix, annot=True)
+# plt.show()
+
+
