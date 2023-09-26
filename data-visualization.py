@@ -2,12 +2,16 @@ import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
 import seaborn as sns
+from sklearn.preprocessing import LabelEncoder
 
 # Read the CSV file
 # df = pd.read_csv("sorted_output.csv")
 
 # View the first 5 rows
 # print(df.head())
+
+# check for null values
+# print(df.isnull().sum())
 
 # Bar graph showing count of 'town'
 # sns.countplot(x='town', data = df)
@@ -135,7 +139,7 @@ import seaborn as sns
 # plt.show()
 
 
-# df = pd.read_csv("2012_onwards_sorted_output.csv")
+df = pd.read_csv("2012_onwards_sorted_output.csv")
 
 # running slow, requires optimization (sub-categorize year and resale price)
 # Scatter Plot showing y = 'resale_price', x = 'year' 
@@ -156,7 +160,7 @@ import seaborn as sns
 # print(df['town'].unique())
 # print(len(df['town'].unique()))
 
-
+# One Hot Encoding produces +26 columns. High dimensionality not suitable for ML.
 # ohe_town = pd.get_dummies(df["town"]).astype(int)
 
 # df = pd.concat([df, ohe_town], axis="columns")
@@ -169,7 +173,14 @@ import seaborn as sns
 
 # print('Merged CSV file saved at:', ohe_df)
 
+# Label encoding does not produce new features unlike OHE, but ML models may misinterpret numbers for hierachy.
+labelEncoder = LabelEncoder()
+df["le_town"] = labelEncoder.fit_transform(df["town"])
+le_df = 'le_df.csv'
+df.to_csv(le_df, index=False)
+# print('Merged CSV file saved at:', le_df)
 
-df = pd.read_csv("ohe_df.csv")
-
-print(df)
+df = pd.read_csv("le_df.csv")
+corr_matrix = df.corr(numeric_only=True)
+sns.heatmap(corr_matrix, annot=True)
+plt.show()
