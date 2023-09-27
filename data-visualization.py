@@ -3,15 +3,17 @@ import numpy as np
 import pandas as pd
 import seaborn as sns
 from sklearn.preprocessing import LabelEncoder
-
+from sklearn import model_selection
+from sklearn.linear_model import LogisticRegression
+from sklearn.model_selection import train_test_split
 # Read the CSV file
 # df = pd.read_csv("sorted_output.csv")
 
 # View the first 5 rows
 # print(df.head())
 
-# check for null values
-# print(df.isnull().sum())
+# see df info
+# print(df.info())
 
 # Histogram plot showing count of 'town'
 # sns.histplot(x='town', data = df)
@@ -116,3 +118,4 @@ df = pd.read_csv("ouput.csv")
 # sns.set(font_scale=1.25)
 # hm = sns.heatmap(cm,  fmt='.2f', annot=True, annot_kws={'size': 10}, yticklabels=cols.values, xticklabels=cols.values)
 # plt.show()
+
