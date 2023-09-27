@@ -86,9 +86,7 @@ from sklearn.preprocessing import LabelEncoder
 # plt.show()
 
 
-df = pd.read_csv("2012_onwards_sorted_output.csv")
-
-df1 = pd.read_csv("ouput.csv")
+# df = pd.read_csv("2012_onwards_sorted_output.csv")
 
 # print(df['town'].unique())
 # print(len(df['town'].unique()))
@@ -102,19 +100,19 @@ df1 = pd.read_csv("ouput.csv")
 # print('Merged CSV file saved at:', ohe_df)
 
 # Label encoding does not produce new features unlike OHE, but ML models may misinterpret numbers for hierachy.
-
+# labelEncoder = LabelEncoder()
+# df["le_town"] = labelEncoder.fit_transform(df["town"])
+# le_df = 'le_df.csv'
+# df.to_csv(le_df, index=False)
 # print('Merged CSV file saved at:', le_df)
 
-'''labelEncoder = LabelEncoder()
-df["le_town"] = labelEncoder.fit_transform(df["town"])
-le_df = 'le_df.csv'
-df.to_csv(le_df, index=False)'''
+df = pd.read_csv("ouput.csv")
 
-corr_matrix = df1.corr(numeric_only=True)
-k = 7
-cols = corr_matrix.nlargest(k, 'resale_price')['resale_price'].index
-cm = np.corrcoef(df1[cols].values.T)
-sns.set(font_scale=1.25)
-hm = sns.heatmap(cm,  fmt='.2f', annot=True, annot_kws={'size': 10}, yticklabels=cols.values, xticklabels=cols.values)
-
-plt.show()
+# Correlation matrix and heatmap
+# corr_matrix = df.corr(numeric_only=True)
+# k = 7
+# cols = corr_matrix.nlargest(7, 'resale_price')['resale_price'].index
+# cm = np.corrcoef(df[cols].values.T)
+# sns.set(font_scale=1.25)
+# hm = sns.heatmap(cm,  fmt='.2f', annot=True, annot_kws={'size': 10}, yticklabels=cols.values, xticklabels=cols.values)
+# plt.show()
