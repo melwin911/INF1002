@@ -1,65 +1,65 @@
 TOWN
 --------------
-AMK - 1 
-BEDOK - 2
-BISHAN - 3
-BUKIT BATOK - 4
-BUKIT MERAH - 5
-BUKIT PANJANG - 6
-BUKIT TIMAH - 7
-CENTRAL AREA - 8
-CCK - 9
-CLEMENTI - 10
-GEYLANG - 11 
-HOUGANG - 12
-JE - 13
-JW - 14
-KALLANG/ WHAMPOA - 15
-LCK - 16
-MARINE PARADE - 17
-PASIR RIS - 18
-PUNGGOL - 19
-QUEENSTOWN - 20
-SEMBAWANG - 21
-SENGKANG - 22
-SERANGOON - 23
-TAMPINES - 24
-TOA PAYOH - 25
-WOODLANDS - 26
-YISHUN - 27
+AMK - 0 
+BEDOK - 1
+BISHAN - 2
+BUKIT BATOK - 3
+BUKIT MERAH - 4
+BUKIT PANJANG - 5
+BUKIT TIMAH - 6
+CENTRAL AREA - 7
+CCK - 8
+CLEMENTI - 9
+GEYLANG - 10 
+HOUGANG - 11
+JE - 12
+JW - 13
+KALLANG/ WHAMPOA - 14
+LCK - 15
+MARINE PARADE - 16
+PASIR RIS - 17
+PUNGGOL - 18
+QUEENSTOWN - 19
+SEMBAWANG - 20
+SENGKANG - 21
+SERANGOON - 22
+TAMPINES - 23
+TOA PAYOH - 24
+WOODLANDS - 25
+YISHUN - 26
 
 
 FLAT-TYPE
 ----------------
-1 room - 1 
-2 room - 2
-3 room - 3
-4 room - 4
-5 room - 5
-Executive - 6
-Multi Generation - 7
+1 room - 
+2 room - 
+3 room - 
+4 room - 
+5 room - 
+Executive - 
+Multi Generation - 
 
 
 FLAT MODEL
 ----------------------
-2 room - 1
-3 gen - 2
-Adjourned flat - 3
-Apartment - 4 
-DBSS - 5
-Improved - 6
-Improved-Maisonette - 7
-Maisonette - 8
-Model A - 9
-Model A2 - 10
-Model A-Maisonette - 11
-Multi Generation - 12
-New Generation - 13
-Premium Apartment - 14
-Premium Apartment Loft - 15
-Premium Maisonette - 16
-Simplified - 17
-Standard - 18
-Terrace - 19
-Type S1 - 20
-Type S2 - 21
+2 room - 
+3 gen - 
+Adjourned flat - 
+Apartment - 
+DBSS - 
+Improved - 
+Improved-Maisonette - 
+Maisonette - 
+Model A - 
+Model A2 - 
+Model A-Maisonette - 
+Multi Generation - 
+New Generation - 
+Premium Apartment - 
+Premium Apartment Loft - 
+Premium Maisonette - 
+Simplified - 
+Standard - 
+Terrace - 
+Type S1 - 
+Type S2 - 
