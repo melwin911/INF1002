@@ -78,11 +78,11 @@ plt.title("Resale price over time",size='x-large')
 plt.show()
 
 # Scatter Plot showing y = 'resale_price', x = 'floor_area_sqm' 
-# sns.scatterplot(data=df, x="floor_area_sqm", y="resale_price")
-# plt.title('Resale Price and floor area sqm')
-# plt.xlabel('floor area sqm')
-# plt.ylabel('Resale Price')
-# # remove scientific notation
-# plt.ticklabel_format(style='plain', axis='y')
-# plt.show()
+sns.scatterplot(data=df, x="floor_area_sqm", y="resale_price")
+plt.title('Resale Price and floor area sqm')
+plt.xlabel('floor area sqm')
+plt.ylabel('Resale Price')
+# remove scientific notation
+plt.ticklabel_format(style='plain', axis='y')
+plt.show()
 
