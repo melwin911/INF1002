@@ -8,8 +8,10 @@ from sklearn.preprocessing import LabelEncoder
 from sklearn import model_selection
 from sklearn.linear_model import LogisticRegression
 from sklearn.model_selection import train_test_split
-# Read the CSV file
-# df = pd.read_csv("sorted_output.csv")
+
+# Read the CSV file, save as dataframe (df)
+# data taken from 2012 onwards as earlier years contain missing data
+df = pd.read_csv("2012_onwards_sorted_output.csv")
 
 # View the first 5 rows
 # print(df.head())
@@ -48,12 +50,6 @@ from sklearn.model_selection import train_test_split
 # plt.xticks(rotation=90)
 # plt.show()
 
-# Histogram plot showing count of 'street_name'
-# sns.countplot(x='street_name', data = df)
-# plt.title('Count of Street Name')
-# plt.xticks(rotation=90)
-# plt.show()
-
 # Histogram plot showing count of 'floor_area_sqm'
 # sns.histplot(x='floor_area_sqm', data = df)
 # plt.title('Count of Floor Area Sqm')
@@ -71,13 +67,14 @@ from sklearn.model_selection import train_test_split
 # plt.ticklabel_format(style='plain', axis='x')
 # plt.show()
 
-# Scatter Plot showing y = 'resale_price', x = 'year' 
-# sns.scatterplot(data=df, x="year", y="resale_price")
-# plt.title('Resale Price over years')
+# Line graph showing y='resale_price', x='year' 
+# plt.figure(figsize=(14,5))
+# sns.set_style("ticks")
+# sns.lineplot(data=df,x="year",y='resale_price',color='firebrick')
 # plt.xlabel('Year')
 # plt.ylabel('Resale Price')
-# # remove scientific notation
-# plt.ticklabel_format(style='plain', axis='y')
+# sns.despine()
+# plt.title("Resale price over time",size='x-large')
 # plt.show()
 
 # Scatter Plot showing y = 'resale_price', x = 'floor_area_sqm' 
@@ -89,9 +86,7 @@ from sklearn.model_selection import train_test_split
 # plt.ticklabel_format(style='plain', axis='y')
 # plt.show()
 
-
-df = pd.read_csv("2012_onwards_sorted_output.csv")
-
+# Start of ML
 # print(df['town'].unique())
 # print(len(df['town'].unique()))
 
@@ -107,7 +102,7 @@ df = pd.read_csv("2012_onwards_sorted_output.csv")
 # df.to_csv(le_df, index=False)
 # print('Merged CSV file saved at:', le_df)
 
-df = pd.read_csv("le_df.csv")
+# df = pd.read_csv("le_df.csv")
 
 # Correlation matrix and heatmap
 # corr_matrix = df.corr(numeric_only=True)
@@ -120,18 +115,18 @@ df = pd.read_csv("le_df.csv")
 # print(df)
 
 # drop some unnecessary columns
-df = df.drop('street_name',axis=1)
-df = df.drop('flat_model',axis=1)
-df = df.drop('block',axis=1)
+# df = df.drop('street_name',axis=1)
+# df = df.drop('flat_model',axis=1)
+# df = df.drop('block',axis=1)
 
-# Start of ML
-from sklearn.metrics import mean_squared_error as MSE
-from sklearn.model_selection import train_test_split
 
-x = df.drop('resale_price',axis =1).values
-y = df['resale_price'].values
+# from sklearn.metrics import mean_squared_error as MSE
+# from sklearn.model_selection import train_test_split
 
-x_train, x_test, y_train, y_test = train_test_split(x, y, test_size=0.3, random_state=101)
+# x = df.drop('resale_price',axis =1).values
+# y = df['resale_price'].values
+
+# x_train, x_test, y_train, y_test = train_test_split(x, y, test_size=0.3, random_state=101)
 
 # standardization scaler - fit&transform on train, fit only on test. DO NOT SCALE for better accuracy
 # from sklearn.preprocessing import StandardScaler
@@ -165,14 +160,14 @@ x_train, x_test, y_train, y_test = train_test_split(x, y, test_size=0.3, random_
 # print('VarScore:',metrics.explained_variance_score(y_test,y_pred))
 
 # KNN
-from sklearn.neighbors import KNeighborsRegressor
-knn = KNeighborsRegressor(algorithm='brute')
-knn.fit(x_train,y_train)
-predictions = knn.predict(x_test)
+# from sklearn.neighbors import KNeighborsRegressor
+# knn = KNeighborsRegressor(algorithm='brute')
+# knn.fit(x_train,y_train)
+# predictions = knn.predict(x_test)
 
-mse = MSE(y_test, predictions)
-rmse = mse ** (1/2)
-print(rmse)
+# mse = MSE(y_test, predictions)
+# rmse = mse ** (1/2)
+# print("RMSE : % f" %(rmse))
 
 # Visualizing Our predictions
 # fig = plt.figure(figsize=(10,5))
@@ -181,26 +176,29 @@ print(rmse)
 # plt.plot(y_test,y_test,'r')
 # plt.show()
 
-import xgboost as xg
-xgb_r = xg.XGBRegressor(objective ='reg:linear', n_estimators = 10, seed = 123)
-xgb_r.fit(x_train, y_train)
-pred = xgb_r.predict(x_test)
-rmse = np.sqrt(MSE(y_test, pred))
-print("RMSE : % f" %(rmse))
+# import xgboost as xg
+# xgb_r = xg.XGBRegressor(objective ='reg:linear', n_estimators = 10, seed = 123)
+# xgb_r.fit(x_train, y_train)
+# pred = xgb_r.predict(x_test)
+# rmse = np.sqrt(MSE(y_test, pred))
+# print("RMSE : % f" %(rmse))
 
-from sklearn.linear_model import Lasso
-lasso = Lasso()
-lasso.fit(x_train, y_train)
-pred = lasso.predict(x_test)
-rmse = np.sqrt(MSE(y_test, pred))
-print("RMSE : % f" %(rmse))
+# from sklearn.linear_model import Lasso
+# lasso = Lasso()
+# lasso.fit(x_train, y_train)
+# pred = lasso.predict(x_test)
+# rmse = np.sqrt(MSE(y_test, pred))
+# print("RMSE : % f" %(rmse))
 
-from sklearn.linear_model import Ridge
-ridge = Ridge()
-ridge.fit(x_train, y_train)
-pred = ridge.predict(x_test)
-rmse = np.sqrt(MSE(y_test, pred))
-print("RMSE : % f" %(rmse))
+# from sklearn.linear_model import Ridge
+# ridge = Ridge()
+# ridge.fit(x_train, y_train)
+# pred = ridge.predict(x_test)
+# rmse = np.sqrt(MSE(y_test, pred))
+# print("RMSE : % f" %(rmse))
 
 # add data inputs (highest correlation) for predictions
 # optimize models
+
+# hook up to frontend
+# merge with crawled data
