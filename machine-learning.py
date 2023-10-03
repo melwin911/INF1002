@@ -12,7 +12,7 @@ from sklearn.metrics import mean_squared_error as MSE
 from sklearn.model_selection import train_test_split
 from sklearn.linear_model import LinearRegression
 from sklearn.neighbors import KNeighborsRegressor
-import xgboost as xg
+from xgboost import XGBRegressor
 from sklearn.linear_model import Lasso
 from sklearn.linear_model import Ridge
 
@@ -59,20 +59,20 @@ y = df['resale_price'].values
 x_train, x_test, y_train, y_test = train_test_split(x, y, test_size=0.3, random_state=101)
 
 models = []
-models.append(('KNN', KNeighborsRegressor(algorithm='brute')))
+models.append(('KNN', KNeighborsRegressor()))
 models.append(('MLR', LinearRegression()))
-models.append(('XGB', xg.XGBRegressor(objective ='reg:linear', n_estimators = 10, seed = 123)))
+models.append(('XGB', XGBRegressor()))
 models.append(('LSO', Lasso()))
 models.append(('RDG', Ridge()))
 
-# Training and testing
+# 1st iteration training and testing
 for name, model in models:
     model.fit(x_train, y_train)
     test_predictions = model.predict(x_test)
     rmse = (MSE(y_test, test_predictions)) ** (1/2)
 
-    # Root mean squared error
-    print(f"{name} RMSE:% f" %(rmse))
+    # Root mean squared error and report
+    print(f"First Iteration {name} RMSE:% f" %(rmse))
 
     # Visualizing predictions
     # fig = plt.figure(figsize=(10,5))
@@ -82,14 +82,16 @@ for name, model in models:
     # plt.ticklabel_format(style='plain', axis='x')
     # plt.show()
 
+# Refer to tuning_hyperparams.py to see how best hyperparams were derived
+
 # prediction using user inputs
 
 # Some dummy data:
-# 2012, 0, 1, 3, 45, 1986
-# 2012, 0, 1, 1, 44, 1980
+# 2012,0,1,3,45,1986
+# 2012,0,1,1,44,1980
 
-# 2023, 0, 1, 3, 45, 1986
-# 2023, 0, 1, 1, 44, 1980
+# 2023,0,1,3,45,1986
+# 2023,0,1,1,44,1980
 
 u_input = input('Enter the year, town, flat type, storey range, floor area sqm and lease commence year:').split(",")
 u_year, u_town, u_flat_type, u_storey_range, u_floor_area_sqm, u_lease_commence_year = u_input
@@ -107,6 +109,8 @@ u_test.append(int(u_lease_commence_year))
 for name, model in models:
     u_prediction = model.predict([u_test])
     print(u_prediction[0])
+
+    
 
 # Changes made from references: 
 # 1) label encoded more columns
