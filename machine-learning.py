@@ -17,10 +17,10 @@ from sklearn.linear_model import Lasso
 from sklearn.linear_model import Ridge
 
 # Read the CSV file, save as dataframe (df)
-# data taken from 2012 onwards as earlier years contain missing data
+# Data taken from 2012 onwards as earlier years contain missing data
 # df = pd.read_csv("2012_onwards_sorted_output.csv")
 
-# peek unique town values
+# Peek unique town values
 # print(df['town'].unique())
 # print(len(df['town'].unique()))
 
