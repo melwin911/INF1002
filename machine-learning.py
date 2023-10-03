@@ -58,21 +58,25 @@ x_train, x_test, y_train, y_test = train_test_split(x, y, test_size=0.3, random_
 # not using standardization scaler for better accuracy
 
 # Multiple Liner Regression
-from sklearn.linear_model import LinearRegression
-regressor = LinearRegression()
-regressor.fit(x_train, y_train)
-predictions = regressor.predict(x_test)
+# from sklearn.linear_model import LinearRegression
+# regressor = LinearRegression()
+# regressor.fit(x_train, y_train)
+# predictions = regressor.predict(x_test)
 
 # Root mean squared error
-mse = MSE(y_test, predictions)
-rmse = mse ** (1/2)
-print("RMSE : % f" %(rmse))
+# mse = MSE(y_test, predictions)
+# rmse = mse ** (1/2)
+# print("RMSE : % f" %(rmse))
 
 # Visualizing predictions
-fig = plt.figure(figsize=(10,5))
-plt.scatter(y_test,predictions)
-plt.plot(y_test,y_test,'r')
-plt.show()
+# fig = plt.figure(figsize=(10,5))
+# plt.scatter(y_test,predictions)
+# plt.plot(y_test,y_test,'r')
+# plt.show()
+
+# user_input = input().split()
+# unit, height, weight = user_input
+
 
 # KNN
 from sklearn.neighbors import KNeighborsRegressor
@@ -86,57 +90,57 @@ rmse = mse ** (1/2)
 print("RMSE : % f" %(rmse))
 
 # Visualizing predictions
-fig = plt.figure(figsize=(10,5))
-plt.scatter(y_test,predictions)
-plt.plot(y_test,y_test,'r')
-plt.show()
+# fig = plt.figure(figsize=(10,5))
+# plt.scatter(y_test,predictions)
+# plt.plot(y_test,y_test,'r')
+# plt.show()
 
-import xgboost as xg
-xgb_r = xg.XGBRegressor(objective ='reg:linear', n_estimators = 10, seed = 123)
-xgb_r.fit(x_train, y_train)
-predictions = xgb_r.predict(x_test)
+# import xgboost as xg
+# xgb_r = xg.XGBRegressor(objective ='reg:linear', n_estimators = 10, seed = 123)
+# xgb_r.fit(x_train, y_train)
+# predictions = xgb_r.predict(x_test)
 
-# Root mean squared error
-mse = MSE(y_test, predictions)
-rmse = mse ** (1/2)
-print("RMSE : % f" %(rmse))
+# # Root mean squared error
+# mse = MSE(y_test, predictions)
+# rmse = mse ** (1/2)
+# print("RMSE : % f" %(rmse))
 
-# Visualizing predictions
-fig = plt.figure(figsize=(10,5))
-plt.scatter(y_test,predictions)
-plt.plot(y_test,y_test,'r')
-plt.show()
+# # Visualizing predictions
+# fig = plt.figure(figsize=(10,5))
+# plt.scatter(y_test,predictions)
+# plt.plot(y_test,y_test,'r')
+# plt.show()
 
-from sklearn.linear_model import Lasso
-lasso = Lasso()
-lasso.fit(x_train, y_train)
-predictions = lasso.predict(x_test)
+# from sklearn.linear_model import Lasso
+# lasso = Lasso()
+# lasso.fit(x_train, y_train)
+# predictions = lasso.predict(x_test)
 
-# Root mean squared error
-mse = MSE(y_test, predictions)
-rmse = mse ** (1/2)
-print("RMSE : % f" %(rmse))
+# # Root mean squared error
+# mse = MSE(y_test, predictions)
+# rmse = mse ** (1/2)
+# print("RMSE : % f" %(rmse))
 
-# Visualizing predictions
-fig = plt.figure(figsize=(10,5))
-plt.scatter(y_test,predictions)
-plt.plot(y_test,y_test,'r')
-plt.show()
+# # Visualizing predictions
+# fig = plt.figure(figsize=(10,5))
+# plt.scatter(y_test,predictions)
+# plt.plot(y_test,y_test,'r')
+# plt.show()
 
-from sklearn.linear_model import Ridge
-ridge = Ridge()
-ridge.fit(x_train, y_train)
-predictions = ridge.predict(x_test)
+# from sklearn.linear_model import Ridge
+# ridge = Ridge()
+# ridge.fit(x_train, y_train)
+# predictions = ridge.predict(x_test)
 
-# Root mean squared error
-mse = MSE(y_test, predictions)
-rmse = mse ** (1/2)
-print("RMSE : % f" %(rmse))
+# # Root mean squared error
+# mse = MSE(y_test, predictions)
+# rmse = mse ** (1/2)
+# print("RMSE : % f" %(rmse))
 
-# Visualizing predictions
-fig = plt.figure(figsize=(10,5))
-plt.scatter(y_test,predictions)
-plt.plot(y_test,y_test,'r')
-plt.show()
+# # Visualizing predictions
+# fig = plt.figure(figsize=(10,5))
+# plt.scatter(y_test,predictions)
+# plt.plot(y_test,y_test,'r')
+# plt.show()
 
 # changes made from reference: label encoded more columns and removed scaling for higher accuracy
