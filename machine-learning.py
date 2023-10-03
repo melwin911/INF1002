@@ -48,7 +48,7 @@ df = pd.read_csv("le_df.csv")
 # plt.show()
 # print(df)
 
-# drop some unnecessary columns
+# Drop some unnecessary columns
 df = df.drop('street_name',axis=1)
 df = df.drop('flat_model',axis=1)
 df = df.drop('block',axis=1)
@@ -65,7 +65,7 @@ models.append(('XGB', xg.XGBRegressor(objective ='reg:linear', n_estimators = 10
 models.append(('LSO', Lasso()))
 models.append(('RDG', Ridge()))
 
-# training and testing
+# Training and testing
 for name, model in models:
     model.fit(x_train, y_train)
     test_predictions = model.predict(x_test)
@@ -84,7 +84,7 @@ for name, model in models:
 
 # prediction using user inputs
 
-# some dummy data:
+# Some dummy data:
 # 2012, 0, 1, 3, 45, 1986
 # 2012, 0, 1, 1, 44, 1980
 
@@ -103,11 +103,11 @@ u_test.append(float(u_floor_area_sqm))
 u_test.append(int(u_lease_commence_year))
 
 
-# user predictions using all models
+# User predictions using all models
 for name, model in models:
     u_prediction = model.predict([u_test])
     print(u_prediction[0])
 
-# changes made from references: 
+# Changes made from references: 
 # 1) label encoded more columns
 # 2) removed scaling for higher accuracy
