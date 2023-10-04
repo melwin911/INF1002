@@ -72,7 +72,7 @@ for name, model in models:
     rmse = (MSE(y_test, test_predictions)) ** (1/2)
 
     # Root mean squared error and report
-    print(f"First Iteration {name} RMSE:% f" %(rmse))
+    print(f"1st Iteration {name} RMSE:% f" %(rmse))
 
     # Visualizing predictions
     # fig = plt.figure(figsize=(10,5))
@@ -83,6 +83,29 @@ for name, model in models:
     # plt.show()
 
 # Refer to tuning_hyperparams.py to see how best hyperparams were derived
+tuned_models = []
+tuned_models.append(('KNN', KNeighborsRegressor(algorithm='auto', weights='distance')))
+tuned_models.append(('MLR', LinearRegression(copy_X=True, fit_intercept=True, n_jobs=None, positive=False)))
+tuned_models.append(('XGB', XGBRegressor(colsample_bytree=0.5, gamma=0, learning_rate=0.3, max_depth=10, min_child_weight=1, subsample=1)))
+tuned_models.append(('LSO', Lasso(alpha=1.0, copy_X=True, fit_intercept=True, max_iter=1000, positive=False, precompute=False, warm_start=True)))
+tuned_models.append(('RDG', Ridge(alpha=2.0, copy_X=False, fit_intercept=True, max_iter=500, positive=False, solver='sag')))
+
+# 1st iteration training and testing
+for name, model in tuned_models:
+    model.fit(x_train, y_train)
+    test_predictions = model.predict(x_test)
+    rmse = (MSE(y_test, test_predictions)) ** (1/2)
+
+    # Root mean squared error and report
+    print(f"2nd Iteration {name} RMSE:% f" %(rmse))
+
+    # Visualizing predictions
+    # fig = plt.figure(figsize=(10,5))
+    # plt.scatter(y_test,test_predictions)
+    # plt.plot(y_test,y_test,'r')
+    # plt.ticklabel_format(style='plain', axis='y')
+    # plt.ticklabel_format(style='plain', axis='x')
+    # plt.show()
 
 # prediction using user inputs
 
@@ -104,13 +127,10 @@ u_test.append(int(u_storey_range))
 u_test.append(float(u_floor_area_sqm))
 u_test.append(int(u_lease_commence_year))
 
-
-# User predictions using all models
-for name, model in models:
+# User predictions using all tuned models
+for name, model in tuned_models:
     u_prediction = model.predict([u_test])
     print(u_prediction[0])
-
-    
 
 # Changes made from references: 
 # 1) label encoded more columns
