@@ -130,8 +130,11 @@ u_test.append(int(u_lease_commence_year))
 # User predictions using all tuned models
 for name, model in tuned_models:
     u_prediction = model.predict([u_test])
-    print(u_prediction[0])
+    # print(u_prediction[0]
+    print(f"Tuned {name} prediction: {u_prediction[0]}")
+
 
 # Changes made from references: 
-# 1) label encoded more columns
-# 2) removed scaling for higher accuracy
+# 1) Label encoded more features
+# 2) Removed scaling for higher accuracy
+# 3) Tuned models for improved performance
