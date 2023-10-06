@@ -1,5 +1,6 @@
-from flask import Flask, jsonify, request
+from flask import Flask, jsonify, request, render_template, render_template_string
 from flask_cors import CORS
+import folium
 
 # instantiate the app
 app = Flask(__name__)
@@ -101,6 +102,10 @@ def all_hdbs():
 def ping_pong():
     return jsonify('pong!')
 
+#Heat Map Route
+@app.route('/map')
+def map():
+    return render_template('heatmap_map.html')
 
 if __name__ == '__main__':
     app.run()
