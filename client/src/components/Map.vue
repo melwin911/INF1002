@@ -1,8 +1,8 @@
 <template>
 <!-- eslint-disable max-len -->
 <!--Google map-->
-        <div id="map-container-google-2" class="z-depth-1-half map-container" style="width: 400; height: 400; ">
-          <iframe src="https://maps.google.com/maps?q=Singapore&t=&z=13&ie=UTF8&iwloc=&output=embed" frameborder="0"
+        <div id="map-container-google-2" class="z-depth-1-half map-container" style="width: 800; height: 600; ">
+          <iframe src="http://127.0.0.1:5000/map" frameborder="0"
             style="border:0" allowfullscreen></iframe>
         </div>
 

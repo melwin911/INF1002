@@ -47,6 +47,7 @@ HDBs = [
     #town, flat_type,storey_range,floor_area_sqm,lease_commence_date
 ]
 
+
 @app.route('/books', methods=['GET', 'POST'])
 def all_books():
     response_object = {'status': 'success'}
@@ -98,14 +99,17 @@ def all_hdbs():
 
     return jsonify(response_object)
 
+
 @app.route('/ping', methods=['GET'])
 def ping_pong():
     return jsonify('pong!')
+
 
 #Heat Map Route
 @app.route('/map')
 def map():
     return render_template('heatmap_map.html')
+
 
 if __name__ == '__main__':
     app.run()
