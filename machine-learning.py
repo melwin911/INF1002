@@ -50,7 +50,6 @@ df = pd.read_csv("le_df.csv")
 
 # Drop some unnecessary columns
 df = df.drop('street_name',axis=1)
-df = df.drop('flat_model',axis=1)
 df = df.drop('block',axis=1)
 
 x = df.drop('resale_price',axis =1).values
@@ -90,7 +89,7 @@ tuned_models.append(('XGB', XGBRegressor(colsample_bytree=0.5, gamma=0, learning
 tuned_models.append(('LSO', Lasso(alpha=1.0, copy_X=True, fit_intercept=True, max_iter=1000, positive=False, precompute=False, warm_start=True)))
 tuned_models.append(('RDG', Ridge(alpha=2.0, copy_X=False, fit_intercept=True, max_iter=500, positive=False, solver='sag')))
 
-# 1st iteration training and testing
+# 2nd iteration training and testing
 for name, model in tuned_models:
     model.fit(x_train, y_train)
     test_predictions = model.predict(x_test)
@@ -107,17 +106,15 @@ for name, model in tuned_models:
     # plt.ticklabel_format(style='plain', axis='x')
     # plt.show()
 
-# prediction using user inputs
+# Prediction using user inputs
 
-# Some dummy data:
-# 2012,0,1,3,45,1986
-# 2012,0,1,1,44,1980
-
-# 2023,0,1,3,45,1986
-# 2023,0,1,1,44,1980
+# Dummy data:
+# 2012,0,1,3,45,5,1986 (actual price: 250000.0)
+# 2012,0,3,1,92,12,1979 (actual price: 457000.0)
 
 u_input = input('Enter the year, town, flat type, storey range, floor area sqm and lease commence year:').split(",")
-u_year, u_town, u_flat_type, u_storey_range, u_floor_area_sqm, u_lease_commence_year = u_input
+u_year, u_town, u_flat_type, u_storey_range, u_floor_area_sqm, u_flat_model, u_lease_commence_year = u_input
+
 
 u_test = []
 u_test.append(int(u_year))
@@ -125,6 +122,7 @@ u_test.append(int(u_town))
 u_test.append(int(u_flat_type))
 u_test.append(int(u_storey_range))
 u_test.append(float(u_floor_area_sqm))
+u_test.append(float(u_flat_model))
 u_test.append(int(u_lease_commence_year))
 
 # User predictions using all tuned models
@@ -133,6 +131,18 @@ for name, model in tuned_models:
     # print(u_prediction[0]
     print(f"Tuned {name} prediction: {u_prediction[0]}")
 
+# Performances
+# 1st Iteration KNN RMSE: 48284.155479
+# 1st Iteration MLR RMSE: 101928.394069
+# 1st Iteration XGB RMSE: 35367.646736
+# 1st Iteration LSO RMSE: 101928.394098
+# 1st Iteration RDG RMSE: 101928.395343
+# ===
+# 2nd Iteration KNN RMSE: 46263.410001
+# 2nd Iteration MLR RMSE: 101928.394069
+# 2nd Iteration XGB RMSE: 31954.618113
+# 2nd Iteration LSO RMSE: 101928.394098
+# 2nd Iteration RDG RMSE: 101928.526047
 
 # Changes made from references: 
 # 1) Label encoded more features
