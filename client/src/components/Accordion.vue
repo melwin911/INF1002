@@ -79,7 +79,7 @@
                       <input
                         type="number"
                         id="addPostalCode"
-                        min="560505"
+                        min="0"
                         max="999999"
                         v-model="addPostalForm.postal"
                         required
@@ -201,7 +201,7 @@ export default {
         });
     },
     initForm() {
-      this.addPostalForm.postal = 100;
+      this.addPostalForm.postal = 560505;
     },
     handleAddSubmit() {
       this.toggleAddPostalModal();
