@@ -1,6 +1,9 @@
 from flask import Flask, jsonify, request, render_template, render_template_string
 from flask_cors import CORS
-import folium
+import pandas as pd 
+import csv
+import json
+from getAmenities import*
 
 # instantiate the app
 app = Flask(__name__)
@@ -9,59 +12,13 @@ app.config.from_object(__name__)
 # enable CORS
 CORS(app, resources={r'/*': {'origins': '*'}})
 
-# dummy book data
-BOOKS = [
-    {
-        'title': 'On the Road',
-        'author': 'Jack Kerouac',
-        'read': True
-    },
-    {
-        'title': 'Harry Potter and the Philosopher\'s Stone',
-        'author': 'J. K. Rowling',
-        'read': False
-    },
-    {
-        'title': 'Green Eggs and Ham',
-        'author': 'Dr. Seuss',
-        'read': True
-    }
-]
-
-# dummy hdb data 
-HDBs = [
-
-    {
-        'town': 'ANG MO KIO',
-
-        'flat_type': '2 ROOM',
-
-        'storey_range': '10 TO 12',
-
-        'floor_area_sqm': 44.0,
-
-        'lease_commence_date': 1979,
-
-        'resale_price': 232000.0,
-    },
-    #town, flat_type,storey_range,floor_area_sqm,lease_commence_date
-]
 
 
-@app.route('/books', methods=['GET', 'POST'])
-def all_books():
-    response_object = {'status': 'success'}
-    if request.method == 'POST':
-        post_data = request.get_json()
-        BOOKS.append({
-            'title': post_data.get('title'),
-            'author': post_data.get('author'),
-            'read': post_data.get('read')
-        })
-        response_object['message'] = 'Book added!'
-    else:
-        response_object['books'] = BOOKS
-    return jsonify(response_object)
+#HDB data 
+with open('final_sorted.csv') as f:
+    HDBs = [{k: str(v) for k, v in row.items()}
+        for row in csv.DictReader(f, skipinitialspace=True)]
+
 
 
 @app.route('/hdbs', methods=['GET', 'POST'])
@@ -73,26 +30,70 @@ def all_hdbs():
 
         post_data = request.get_json()
 
+        """df = pd.read_csv('Data/final_sorted.csv')
+        data = df.loc[df['postal'] == post_data.get('postal')]
+        def get_amenities(): 
+            amenities = [] 
+            for col in data.columns: 
+                amenities.append(data[col].tolist()) 
+            myIndices = [3,4,6,7,9,10,12,13,15,16,18,19] 
+            flattened = [val for sublist in amenities for val in sublist] 
+            flattened = [flattened[i] for i in myIndices] 
+            grouped_list = [flattened[i:i+2] for i in range(0, len(flattened), 2)] 
+            return [{"amenity": item[0], "distance": item[1] * 1000} for item in grouped_list]"""
+
+
         HDBs.append({
 
-            'town': post_data.get('town'),
+            'town': 'TownPlaceholder',
 
-            'flat_type': post_data.get('flat_type'),
+            'flat':  getFlat(int(post_data.get('postal'))),
 
-            'storey_range': post_data.get('storey_range'),
+            'postal': post_data.get('postal'),
 
-            'floor_area_sqm': post_data.get('floor_area_sqm'),
+            'park': getPark(int(post_data.get('postal'))),
 
-            'lease_commence_date': post_data.get('lease_commence_date'),
+            'park_dist': getParkDist(int(post_data.get('postal'))),
 
-            'resale_price': "test",
+            'num_park_2km': 'TownPlaceholder',
 
-            # 'resale_price': round(predictPrice( town = post_data.get('town'),flat_type=post_data.get('flat_type'),storey_range=post_data.get('storey_range'),floor_area_sqm=post_data.get('floor_area_sqm'),lease_commence_date=post_data.get('lease_commence_date'))*1.01), # To return from model
+            'mall': getMall(int(post_data.get('postal'))),
+
+            'mall_dist': getMallDist(int(post_data.get('postal'))),
+
+            'num_mall_2km': 'TownPlaceholder',
+            
+            'top_school': getTopSchool(int(post_data.get('postal'))),
+            
+            'top_school_dist': getTopSchoolDist(int(post_data.get('postal'))),
+
+            'num_top_school_2km': 'TownPlaceholder',
+
+            'hawker': getHawker(int(post_data.get('postal'))),
+
+            'hawker_dist': getHawkerDist(int(post_data.get('postal'))),
+
+            'num_hawker_2km': 'TownPlaceholder',
+
+            'station_name': getStationName(int(post_data.get('postal'))),
+
+            'station_dist': getStationDist(int(post_data.get('postal'))),
+
+            'num_station_2km': 'TownPlaceholder',
+
+            'station_name_2027_onwards': getUpcomingStationName(int(post_data.get('postal'))),
+
+            'station_dist_2027_onwards': getUpcomingStationDist(int(post_data.get('postal'))),
+
+            'num_station_2km_2027_onwards': 'TownPlaceholder',
+
+            'num_of_new_stations_added_here': 'TownPlaceholder',
+
+            'resale_price': 'TownPlaceholder',
 
         })
 
         response_object['message'] = 'Priced!'
-
     else:
 
         response_object['hdbs'] = HDBs
@@ -109,7 +110,6 @@ def ping_pong():
 @app.route('/map')
 def map():
     return render_template('heatmap_map.html')
-
 
 if __name__ == '__main__':
     app.run()
