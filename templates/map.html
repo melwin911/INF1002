@@ -1,7 +1,7 @@
-<!DOCTYPE html>
 <html>
 <head>
     <title>Map</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css"/>
     <style>
         html, body {
             width: 100%;
@@ -18,22 +18,15 @@
             left: 0;
         }
     </style>
-
-    <!-- Load Leaflet CSS and JS -->
-    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css"/>
-    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
-
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
 </head>
 <body>
     <div id="map"></div>
 
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+
     <script>
         var latitude = parseFloat('{{ latitude }}');
         var longitude = parseFloat('{{ longitude }}');
-
-        console.log('Latitude:', latitude);
-        console.log('Longitude:', longitude);
 
         var map = L.map('map').setView([latitude, longitude], 15);
 

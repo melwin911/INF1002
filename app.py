@@ -1,6 +1,6 @@
-from flask import Flask, jsonify, request, render_template, render_template_string
+from flask import Flask, jsonify, request, render_template, render_template_string, redirect, url_for
 from flask_cors import CORS
-
+import requests
 from predict import predictPrice
 
 import pandas as pd 
@@ -19,6 +19,7 @@ CORS(app, resources={r'/*': {'origins': '*'}})
 HDBs = []
 
 Ammenities = []
+
 
 @app.route('/town', methods=['GET'])
 def town():
@@ -50,14 +51,43 @@ def resale_by_town():
 
     # return jsonify(variable1=resaleprice_column, variable2=year_column)
 
+
+global_postal_code = None
+
+
+
+def get_latlng_from_postal_code(postal_code):
+    google_maps_api_key = 'AIzaSyC6v4STqhDYCRcc9afAiHh3RglCTCPNjbU'
+    url = f'https://maps.googleapis.com/maps/api/geocode/json?address={postal_code}&key={google_maps_api_key}'
+
+    try:
+        response = requests.get(url)
+        data = response.json()
+        if data['status'] == 'OK' and len(data['results']) > 0:
+            location = data['results'][0]['geometry']['location']
+            print(location)
+            return {'lat': location['lat'], 'lng': location['lng']}
+        else:
+            print('Geocoding API request failed.')
+            return None
+    except requests.exceptions.RequestException as e:
+        print(f'Error in Geocoding API request: {e}')
+        return None
+
+
 @app.route('/ammenities', methods=['GET', 'POST'])
 def all_ammenities():
 
+    global global_postal_code
     response_object = {'status': 'success'}
+    postal_code = None
+    latitude = None
+    longitude = None
 
     if request.method == 'POST':
 
         post_data = request.get_json()
+        postal_code = post_data.get('postal')
 
         """df = pd.read_csv('Data/final_sorted.csv')
         data = df.loc[df['postal'] == post_data.get('postal')]
@@ -122,9 +152,22 @@ def all_ammenities():
 
         })
 
+        # Call the function to get latitude and longitude
+
+        latlng_data = get_latlng_from_postal_code(postal_code)
+        print(latlng_data)
+
+        if latlng_data:
+            latitude = latlng_data['lat']
+            longitude = latlng_data['lng']
+
+            # Redirect to the map route with latitude and longitude as parameters
+            return redirect(url_for('map', latitude=latitude, longitude=longitude))
+
         response_object['message'] = 'Priced!'
     else:
-
+        response_object['latitude'] = latitude
+        response_object['longitude'] = longitude
         response_object['Ammenities'] = Ammenities
 
     return jsonify(response_object)
@@ -150,9 +193,14 @@ def all_hdbs():
 
             'lease_commence_date': post_data.get('lease_commence_date'),
 
-            #'resale_price': "test",
+            # 'resale_price': "test",
 
-            'resale_price': round(predictPrice( town = post_data.get('town'),flat_type=post_data.get('flat_type'),storey_range=post_data.get('storey_range'),floor_area_sqm=post_data.get('floor_area_sqm'),lease_commence_date=post_data.get('lease_commence_date'))*1.01), # To return from model
+            'resale_price': round(predictPrice( town=post_data.get('town'),
+                                                flat_type=post_data.get('flat_type'),
+                                                storey_range=post_data.get('storey_range'),
+                                                floor_area_sqm=post_data.get('floor_area_sqm'),
+                                                lease_commence_date=post_data.get('lease_commence_date'))*1.01),
+            # To return from model
         })
 
         response_object['message'] = 'Priced!'
@@ -163,10 +211,15 @@ def all_hdbs():
 
     return jsonify(response_object)
 
-#Heat Map Route
-@app.route('/map')
+
+# Heat Map Route
+@app.route('/map', methods=['GET'])
 def map():
-    return render_template('heatmap_map.html')
+    latitude = float(request.args.get('latitude', 1.3521))  # Default latitude if not provided
+    longitude = float(request.args.get('longitude', 103.8198))  # Default longitude if not provided
+
+    return render_template('map.html', latitude=latitude, longitude=longitude)
+
 
 @app.route('/ping', methods=['GET'])
 def ping_pong():
