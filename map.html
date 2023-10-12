@@ -2,6 +2,7 @@
 <head>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC6v4STqhDYCRcc9afAiHh3RglCTCPNjbU"></script>
     <title>Map</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css"/>
     <style>
         html, body {
             width: 100%;
@@ -29,16 +30,14 @@
     <script>
         function initMap() {
             // Retrieve latitude and longitude from the template
-            const latitude = {{ latitude }};
-            const longitude = {{ longitude }};
-
-            console.log('Received latitude:', latitude, 'longitude:', longitude);
-
+            const latitude = parseFloat('{{ latitude }}');
+            const longitude = parseFloat('{{ longitude }}');
+            const zoom = 14;  // Set the desired zoom level
 
             // Create a map centered at the specified latitude and longitude
             const map = new google.maps.Map(document.getElementById('map'), {
                 center: { lat: latitude, lng: longitude },
-                zoom: 12
+                zoom: zoom
             });
 
             // Add a marker at the specified location

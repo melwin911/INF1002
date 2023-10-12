@@ -1,7 +1,6 @@
 from flask import Flask, jsonify, request, render_template, render_template_string, redirect, url_for
 from flask_cors import CORS
 import requests
-from flask_socketio import SocketIO
 from predict import predictPrice
 
 import pandas as pd 
@@ -12,7 +11,7 @@ from getAmenities import*
 # instantiate the app
 app = Flask(__name__)
 app.config.from_object(__name__)
-socketio = SocketIO(app)
+
 
 # enable CORS
 CORS(app, resources={r'/*': {'origins': '*'}})
@@ -54,11 +53,8 @@ def resale_by_town():
     # return jsonify(variable1=resaleprice_column, variable2=year_column)
 
 
-
-
 def get_latlng_from_postal_code(postal_code):
-    post_data = request.get_json()
-    latlng_data = {'lat': getLatitude(int(post_data.get('postal'))), 'lng': getLongitude(int(post_data.get('postal'))) }
+    latlng_data = {'lat': getLatitude(int(postal_code)), 'lng': getLongitude(int(postal_code))}
     return latlng_data
 
 
@@ -146,20 +142,23 @@ def all_ammenities():
         if latlng_data:
             latitude = latlng_data['lat']
             longitude = latlng_data['lng']
-            print(f'Latitude: {latitude}, Longitude: {longitude}')
-            return redirect(url_for('map', latitude=latlng_data['lat'], longitude=latlng_data['lng']))
+            print(f'Latitude: {latitude}, Longitude: {longitude}')  # Add this line for debugging
+
+            response_object['latitude'] = latitude
+            response_object['longitude'] = longitude
+
+            # Redirect to the map route with latitude and longitude as parameters
+            return redirect(url_for('map', latitude=latitude, longitude=longitude))
         else:
             print('Unable to retrieve latitude and longitude.')
-            # Redirect to the map route with latitude and longitude as parameters
-            # return redirect(url_for('map', latitude=latitude, longitude=longitude))
 
         response_object['message'] = 'Priced!'
     else:
-        # response_object['latitude'] = latitude
-        # response_object['longitude'] = longitude
+
         response_object['Ammenities'] = Ammenities
 
     return jsonify(response_object)
+
 
 @app.route('/hdbs', methods=['GET', 'POST'])
 def all_hdbs():
@@ -210,12 +209,11 @@ def all_hdbs():
 # Heat Map Route
 @app.route('/map', methods=['GET'])
 def map():
-
     # Retrieve latitude and longitude from the query parameters
     latitude = float(request.args.get('latitude', 1.3521))  # Default latitude if not provided
     longitude = float(request.args.get('longitude', 103.8198))  # Default longitude if not provided
-    zoom = 14
-    print(f"lat1: {latitude}, long1:{longitude} ")
+    zoom = 13
+    print(f'Received Latitude: {latitude}, Received Longitude: {longitude}')
 
     # Render the map template with the latitude and longitude values
     return render_template('map.html', latitude=latitude, longitude=longitude, zoom=zoom)
