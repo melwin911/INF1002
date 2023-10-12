@@ -40,6 +40,12 @@
 
         <h4>2027 Station Name:</h4>
         <p>{{ hdbs[hdbs.length - 1].station_name_2027_onwards }} ({{ hdbs[hdbs.length - 1].station_dist_2027_onwards }}km)</p>
+
+        <h4>Latitude:</h4>
+        <p>{{ hdbs[hdbs.length - 1].latitude }} ({{ hdbs[hdbs.length - 1].latitude }})</p>
+
+        <h4>Longitude:</h4>
+        <p>{{ hdbs[hdbs.length - 1].longitude }} ({{ hdbs[hdbs.length - 1].longitude }})</p>
     </div>
 </div>
 

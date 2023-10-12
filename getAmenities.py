@@ -136,3 +136,19 @@ def getUpcomingStationDist(intPostal):
         return "Postal code not found"
     park_value = row['station_dist_2027_onwards'].iloc[0]
     return park_value
+
+def getLatitude(intPostal):
+    postal = str(intPostal)
+    row = df.loc[df['postal'] == postal]
+    if row.empty:
+        return "Postal code not found"
+    park_value = row['latitude'].iloc[0]
+    return park_value
+
+def getLongitude(intPostal):
+    postal = str(intPostal)
+    row = df.loc[df['postal'] == postal]
+    if row.empty:
+        return "Postal code not found"
+    park_value = row['longitude'].iloc[0]
+    return park_value

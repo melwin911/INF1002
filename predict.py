@@ -14,7 +14,8 @@ from geopy.extra.rate_limiter import RateLimiter
 from sklearn.neighbors import KNeighborsRegressor
 import pickle
 
-def predictPrice(town,flat_type,storey_range,floor_area_sqm,lease_commence_date):
+
+def predictPrice(town,flat_type,storey_range,floor_area_sqm,lease_commence_date, latitude, longitude):
     
     #town, flat_type,storey_range,floor_area_sqm,lease_commence_date
     input_data = {
@@ -23,13 +24,15 @@ def predictPrice(town,flat_type,storey_range,floor_area_sqm,lease_commence_date)
         'storey_range': storey_range,
         'floor_area_sqm': floor_area_sqm,
         'lease_commence_date': lease_commence_date,
+        'latitude': latitude,
+        'longitude': longitude
     }
     
 
     #Geocode by town (Singapore is so small that geocoding by addresses might not make much difference compared to geocoding to town)
     town = input_data["town"]
     latitude = 0
-    longitude =  0
+    longitude = 0
     try:
         geolocator = Nominatim(user_agent="ny_explorer")
         loc = geolocator.geocode(town)
@@ -52,6 +55,7 @@ def predictPrice(town,flat_type,storey_range,floor_area_sqm,lease_commence_date)
     input_data['flat_type'] = flat_typeDict[input_data['flat_type']]
 
     dataframe = pd.DataFrame.from_records([input_data])
+    print(dataframe)
     data = dataframe.values
 
     scalername = 'scaler.sav'
@@ -67,3 +71,5 @@ def predictPrice(town,flat_type,storey_range,floor_area_sqm,lease_commence_date)
     result = loaded_model.predict(data)
     #print(result)
     return result[0]
+
+
