@@ -15,17 +15,15 @@ from sklearn.neighbors import KNeighborsRegressor
 import pickle
 
 
-def predictPrice(town,flat_type,storey_range,floor_area_sqm,lease_commence_date, latitude, longitude):
+def predictPrice(town,flat_type,storey_range,floor_area_sqm,lease_commence_date):
     
-    #town, flat_type,storey_range,floor_area_sqm,lease_commence_date
+    # town, flat_type,storey_range,floor_area_sqm,lease_commence_date
     input_data = {
         'town': town,
         'flat_type': flat_type,
         'storey_range': storey_range,
         'floor_area_sqm': floor_area_sqm,
-        'lease_commence_date': lease_commence_date,
-        'latitude': latitude,
-        'longitude': longitude
+        'lease_commence_date': lease_commence_date
     }
     
 

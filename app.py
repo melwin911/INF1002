@@ -1,11 +1,6 @@
-from flask import Flask, jsonify, request, render_template, render_template_string, redirect, url_for
+from flask import Flask, jsonify, request, render_template
 from flask_cors import CORS
-import requests
 from predict import predictPrice
-
-import pandas as pd 
-import csv
-import json
 from getAmenities import*
 
 # instantiate the app
@@ -51,11 +46,6 @@ def resale_by_town():
     return jsonify(aggregated_data_list)
 
     # return jsonify(variable1=resaleprice_column, variable2=year_column)
-
-
-def get_latlng_from_postal_code(postal_code):
-    latlng_data = {'lat': getLatitude(int(postal_code)), 'lng': getLongitude(int(postal_code))}
-    return latlng_data
 
 
 @app.route('/ammenities', methods=['GET', 'POST'])
@@ -119,10 +109,6 @@ def all_ammenities():
 
             'num_station_2km': 'TownPlaceholder',
 
-            'latitude': getLatitude(int(post_data.get('postal'))),
-
-            'longitude': getLongitude(int(post_data.get('postal'))),
-
             'station_name_2027_onwards': getUpcomingStationName(int(post_data.get('postal'))),
 
             'station_dist_2027_onwards': getUpcomingStationDist(int(post_data.get('postal'))),
@@ -135,22 +121,6 @@ def all_ammenities():
         })
 
         # Call the function to get latitude and longitude
-
-        latlng_data = get_latlng_from_postal_code(postal_code)
-        # print(latlng_data)
-
-        if latlng_data:
-            latitude = latlng_data['lat']
-            longitude = latlng_data['lng']
-            print(f'Latitude: {latitude}, Longitude: {longitude}')  # Add this line for debugging
-
-            response_object['latitude'] = latitude
-            response_object['longitude'] = longitude
-
-            # Redirect to the map route with latitude and longitude as parameters
-            return redirect(url_for('map', latitude=latitude, longitude=longitude))
-        else:
-            print('Unable to retrieve latitude and longitude.')
 
         response_object['message'] = 'Priced!'
     else:
@@ -181,19 +151,13 @@ def all_hdbs():
 
             'lease_commence_date': post_data.get('lease_commence_date'),
 
-            'latitude': post_data.get('latitude'),
-
-            'longitude': post_data.get('longitude'),
-
             # 'resale_price': "test",
 
             'resale_price': round(predictPrice( town=post_data.get('town'),
                                                 flat_type=post_data.get('flat_type'),
                                                 storey_range=post_data.get('storey_range'),
                                                 floor_area_sqm=post_data.get('floor_area_sqm'),
-                                                lease_commence_date=post_data.get('lease_commence_date'),
-                                                latitude=post_data.get('latitude'),
-                                                longitude=post_data.get('longitude'))*1.01),
+                                                lease_commence_date=post_data.get('lease_commence_date')*1.01))
             # To return from model
         })
 
@@ -209,14 +173,8 @@ def all_hdbs():
 # Heat Map Route
 @app.route('/map', methods=['GET'])
 def map():
-    # Retrieve latitude and longitude from the query parameters
-    latitude = float(request.args.get('latitude', 1.3521))  # Default latitude if not provided
-    longitude = float(request.args.get('longitude', 103.8198))  # Default longitude if not provided
-    zoom = 13
-    print(f'Received Latitude: {latitude}, Received Longitude: {longitude}')
 
-    # Render the map template with the latitude and longitude values
-    return render_template('map.html', latitude=latitude, longitude=longitude, zoom=zoom)
+    return render_template('heatmap_map.html')
 
 
 @app.route('/ping', methods=['GET'])

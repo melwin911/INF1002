@@ -41,11 +41,6 @@
         <h4>2027 Station Name:</h4>
         <p>{{ hdbs[hdbs.length - 1].station_name_2027_onwards }} ({{ hdbs[hdbs.length - 1].station_dist_2027_onwards }}km)</p>
 
-        <h4>Latitude:</h4>
-        <p>{{ hdbs[hdbs.length - 1].latitude }} ({{ hdbs[hdbs.length - 1].latitude }})</p>
-
-        <h4>Longitude:</h4>
-        <p>{{ hdbs[hdbs.length - 1].longitude }} ({{ hdbs[hdbs.length - 1].longitude }})</p>
     </div>
 </div>
 
@@ -116,19 +111,6 @@
             v-if="activeAddPostalModal"
             class="modal-backdrop fade show"
           ></div>
-        </CAccordionBody>
-      </CAccordionItem>
-      <CAccordionItem :item-key="2">
-        <CAccordionHeader> Data and Model information </CAccordionHeader>
-        <CAccordionBody>
-          <strong>This is the second item's accordion body.</strong> It is
-          hidden by default, until the collapse plugin adds the appropriate
-          classes that we use to style each element. These classes control the
-          overall appearance, as well as the showing and hiding via CSS
-          transitions. You can modify any of this with custom CSS or overriding
-          our default variables. It's also worth noting that just about any HTML
-          can go within the <code>.accordion-body</code>, though the transition
-          does limit overflow.
         </CAccordionBody>
       </CAccordionItem>
     </CAccordion>
