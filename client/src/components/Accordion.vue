@@ -14,13 +14,13 @@
           </button>
 
           <br /><br />
-          <!-- Test Values Table-->
           <div class="info-container">
     <h3>Nearby Amenities</h3>
     <br>
-    
+    <!--Render div only if hdbs[] exists and is populated-->
     <div v-if="hdbs && hdbs.length > 0">
         <h4>Address</h4>
+        <!--Display amenities of the last item in hdbs[] (which is the appended item in Amenities[] from flask)-->
         <p>{{ hdbs[hdbs.length - 1].flat }}<br>Singapore {{ hdbs[hdbs.length - 1].postal }}</p>
 
         <h4>Park:</h4>
@@ -149,29 +149,25 @@ export default {
   },
   methods: {
     getHDBs() {
-      const path = "http://localhost:5000/ammenities";
-      //const path = '/hdbs';
+      const path = "http://localhost:5000/amenities";
       axios
         .get(path)
         .then((res) => {
-          this.hdbs = res.data.Ammenities;
+          this.hdbs = res.data.amenities;
           console.log(this.hdbs)
         })
         .catch((error) => {
-          // eslint-disable-next-line
           console.error(error);
         });
     },
     addPostal(payload) {
-      const path = "http://localhost:5000/ammenities";
-      //const path = '/hdbs';
+      const path = "http://localhost:5000/amenities";
       axios
         .post(path, payload)
         .then(() => {
           this.getHDBs();
         })
         .catch((error) => {
-          // eslint-disable-next-line
           console.log(error);
           this.getHDBs();
         });
