@@ -80,7 +80,6 @@ import Accordion from './Accordion.vue';
 import Modal from './Modal.vue';
 import Map from './Map.vue';
 import LineChart from './LineChart.vue';
-import TestChart from './TestChart.vue';
 import Chart from './Chart.vue';
 
 export default {
@@ -93,7 +92,6 @@ export default {
     Modal,
     Map,
     LineChart,
-    TestChart,
     Chart
   },
   data(){

@@ -1,7 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import Ping from '../components/Ping.vue'
 import MainPage from '../components/MainPage.vue'
-import TestChart from '../components/TestChart.vue'
 import LineChart from '../components/LineChart.vue'
 import Map from '../components/Map.vue';
 
@@ -14,14 +13,9 @@ const router = createRouter({
       component: Ping
     },
     {
-      path: '/main',
+      path: '/',
       name: 'MainPage',
       component: MainPage
-    },
-    {
-      path: '/testchart',
-      name: 'TestChart',
-      component: TestChart
     },
     {
       path: '/linechart',
