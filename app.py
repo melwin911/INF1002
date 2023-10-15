@@ -138,8 +138,6 @@ def all_amenities():
             'resale_price': 'ResalePricePlaceholder',
         })
 
-        # Call the function to get latitude and longitude
-
         response_object['message'] = 'Amenities Displayed!'
     else:
 
@@ -215,7 +213,6 @@ def all_hdbs():
     return jsonify(response_object)
 
 
-# Heat Map Route
 @app.route('/map', methods=['GET'])
 def map():
 
