@@ -11,6 +11,7 @@ This project focuses on predictive data analysis of HDB resale prices in Singapo
 
 **Table of Contents**
 + [Features](#features)
++ [Content](#contents)
 + [Installation](#installation)
 + [Usage](#usage)
 
@@ -19,12 +20,30 @@ This project focuses on predictive data analysis of HDB resale prices in Singapo
 
 These are the key features of the project:
 
-- Web scraper to supplement open-source dataset
-- Data Analysis techniques and Visualization tools (`data-visualization.py`)
-- Feature Engineering (`train.py`)
-- Machine Learning (`machinelearning.py`)
-- Predictive Analysis with Hyperparameters Tuning (`machinelearning.py` and `tuning_hyperparam.py`)
-- Graphical user interface (`client/src/App.vue`)
+- Web scraper to supplement open-source dataset (`/web-scraper`)
+- Data Analysis techniques and Visualization tools (`/data_visualization/data-visualization.py`)
+- Feature Engineering (`/machine_learning/model_training_script.py`)
+- Machine Learning (`/machine_learning/machinelearning.py`)
+- Predictive Analysis with Hyperparameters Tuning (`/machine_learning/machinelearning.py` and `/machine_learning/tuning_hyperparam.py`)
+- Graphical User Interface (`client/src/App.vue`)
+
+
+# Contents
+
+The contents within this zip file and repository are as follows:
+
+* `amenities` folder - contains `getAmenities.py` file that accesses the respective column in `/csv_files/amenities.csv`. Given a postal code input, the function selects the corresponding row with that postal code and retrieves the value from the specified column.
+* `client` folder - contains the source codes to build our Graphical User Interface (GUI).
+* `csv_files` folder - contains all the processed csv files used for this project.
+* `data_visualization` folder - contains `data-visualization.py` file that has all the codes of basic charts we used to explore to gain deeper understanding of the data used.
+* `machine_learning` folder - contains everything pertaining to our usage of feature engineering, machine learning as well as training the predictive model.
+* `node_modules` folder - contains all CSS and Bootstrap related files to style our GUI.
+* `opensource_-_dataset` folder - contains all the raw open sourced csv files we took from data.gov.sg, as well `dataset.py` which shows the data preprocessing stage.
+* `predictive_analysis` folder contains `predictive_analysis.py` which showcase the model we chose to do the analysis.
+* `templates` folder contains `heatmap_map.html` which is the heatmap generated to provide an effective visualization of the distribution, density and resale price of HDB across Singapore.
+* `web_scraper` folder contains everything related to our web scrapped used to complement the open-sourced dataset from data.gov.sg
+* `app.py` is the main Flask application used to create the project.
+
 
 # Installation
 

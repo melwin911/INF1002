@@ -1,7 +1,7 @@
 from flask import Flask, jsonify, request, render_template
 from flask_cors import CORS
-from machinelearning import predictPrice
-from getAmenities import*
+from machine_learning.machinelearning import predictPrice
+from amenities.getAmenities import*
 
 # instantiate the app
 app = Flask(__name__)
@@ -21,7 +21,7 @@ selected_town = 0
 
 @app.route('/town', methods=['GET'])
 def town():
-    df = pd.read_csv("2012_onwards_sorted_output.csv")
+    df = pd.read_csv("csv_files/resale_price_data.csv")
 
     data = df.to_dict(orient='records')
     town_column = df["town"].tolist()
@@ -40,7 +40,7 @@ def resale_by_town():
 
     selected_town = (request.args.get('town'))
 
-    df = pd.read_csv("2012_onwards_sorted_output.csv")
+    df = pd.read_csv("csv_files/resale_price_data.csv")
 
     filtered_data = df[df['town'] == selected_town]
 
@@ -60,14 +60,10 @@ def resale_by_floorarea():
 
     selected_town = (request.args.get('town'))
 
-    df = pd.read_csv("2012_onwards_sorted_output.csv")
+    df = pd.read_csv("csv_files/resale_price_data.csv")
 
     filtered_data = df[df['town'] == selected_town]
 
-    # data = df.to_dict(orient='records')
-    # resaleprice_column = df["resale_price"].tolist()
-    # year_column = df["year"].tolist()
-    
     # Group by year and calculate the average resale price
     aggregated_data = filtered_data.groupby('floor_area_sqm')['resale_price'].mean().reset_index()
 
@@ -75,8 +71,6 @@ def resale_by_floorarea():
     aggregated_data_list = aggregated_data.to_dict(orient='records')
 
     return jsonify(aggregated_data_list)
-
-    # return jsonify(variable1=resaleprice_column, variable2=year_column)
 
 
 @app.route('/amenities', methods=['GET', 'POST'])
