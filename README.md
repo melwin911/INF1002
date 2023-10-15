@@ -45,11 +45,12 @@ The contents within this zip file and repository are as follows:
 
 # Installation
 
-# getting Git Repository
+# Getting Git Repository
 git clone https://github.com/melwin911/INF1002
 
-# installing npm 
+# Installing npm 
 pip install node.js
+
 cd client
 
 npm install
@@ -57,10 +58,10 @@ npm install
 
 # Usage 
 
-# run flask app
+# Run flask app
 flask run app.py
 
-# run vue js
+# Run vue.js
 cd client
 
 npm run dev
