@@ -1,7 +1,7 @@
 <template>
     <div class="container">
         <header>
-            <h1 class="title">HDB Price Prediction</h1>
+            <h1 class="title">Predictive Data Analysis on HDB Resale Prices</h1>
         </header>
         <div class="row-modal">
             <div v-if="isLoading">
