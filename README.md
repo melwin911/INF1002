@@ -51,6 +51,7 @@ git clone https://github.com/melwin911/INF1002
 # installing npm 
 pip install node.js
 cd client
+
 npm install
 
 
@@ -61,6 +62,7 @@ flask run app.py
 
 # run vue js
 cd client
+
 npm run dev
 
 
