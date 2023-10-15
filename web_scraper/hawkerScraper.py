@@ -1,4 +1,5 @@
 import pandas as pd
+import numpy as np
 
 def get_hawker_coordinates():
     hawker_coord = pd.read_csv('Data/Downloaded_data/HawkerCentresKML.csv')

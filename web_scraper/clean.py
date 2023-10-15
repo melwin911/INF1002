@@ -1,6 +1,8 @@
 import pandas as pd
 import hdbScraper
 
+
+
 df1 = pd.read_csv('Data/2012_merged.csv')
 df2 = pd.read_csv('Data/Flat_amenities/final_amenities_merged.csv')
 

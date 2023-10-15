@@ -1,3 +1,4 @@
+import numpy as np
 import pandas as pd
 import requests
 import json
@@ -72,6 +73,9 @@ def find_nearest_hawker_hdb():
     flat_hawker = pd.DataFrame.from_dict(nearest_hawker).T
     flat_hawker = flat_hawker.rename(columns={0: 'flat', 1: 'hawker', 2: 'hakwer_dist', 3: 'num_hawker_2km'}).reset_index().drop(['index'], axis=1)
     flat_hawker.to_csv('Data/Flat_amenities/hdb_hawker.csv', index=False)
+
+
+
 
 #for all stations including new plans
 def find_nearest_station_hdb_new():

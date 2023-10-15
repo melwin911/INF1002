@@ -3,6 +3,7 @@ import requests
 import pandas as pd
 import numpy as np
 
+
 url='https://en.wikipedia.org/wiki/List_of_shopping_malls_in_Singapore'
 page = requests.get(url)
 soup = BeautifulSoup(page.text , 'html.parser')
