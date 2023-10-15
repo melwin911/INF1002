@@ -32,16 +32,16 @@ These are the key features of the project:
 The contents within this zip file and repository are as follows:
 
 * `amenities` folder - contains `getAmenities.py` file that accesses the respective column in `/csv_files/amenities.csv`. Given a postal code input, the function selects the corresponding row with that postal code and retrieves the value from the specified column.
-* `client` folder - contains the source codes to build our Graphical User Interface (GUI).
+* `client` folder - contains the source codes used to build our Graphical User Interface (GUI).
 * `csv_files` folder - contains all the processed csv files used for this project.
 * `data_visualization` folder - contains `data-visualization.py` file that has all the codes of basic charts we used to explore to gain deeper understanding of the data used.
-* `machine_learning` folder - contains everything pertaining to our usage of feature engineering, machine learning as well as training the predictive model.
-* `node_modules` folder - contains all CSS and Bootstrap related files to style our GUI.
-* `opensource_-_dataset` folder - contains all the raw open sourced csv files we took from data.gov.sg, as well `dataset.py` which shows the data preprocessing stage.
-* `predictive_analysis` folder contains `predictive_analysis.py` which showcase the model we chose to do the analysis.
-* `templates` folder contains `heatmap_map.html` which is the heatmap generated to provide an effective visualization of the distribution, density and resale price of HDB across Singapore.
-* `web_scraper` folder contains everything related to our web scrapped used to complement the open-sourced dataset from data.gov.sg
-* `app.py` is the main Flask application used to create the project.
+* `machine_learning` folder - contains everything pertaining to our usage machine learning and hyperparameters tuning.
+* `node_modules` folder - contains all CSS and Bootstrap files to style our GUI.
+* `opensource_-_dataset` folder - contains all the raw open-sourced csv files we took from data.gov.sg, as well `dataset.py` that we used to preprocess the raw data.
+* `predictive_analysis` folder contains `predictive_analysis.py` which showcases the model we chose to do the analysis.
+* `templates` folder contains `heatmap_map.html` which is the folium heatmap generated to provide an effective visualization of the distribution, density and resale price of HDB across Singapore.
+* `web_scraper` folder contains everything related to our web scrapped dataset used to complement the open-sourced dataset from data.gov.sg
+* `app.py` is the main Flask application that houses this Project.
 
 
 # Installation
