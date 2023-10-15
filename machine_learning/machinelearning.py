@@ -6,10 +6,11 @@ from xgboost import XGBRegressor
 import datetime
 
 # Encodes string value to a label
-def encode(value):
+def Encode(value):
     df = pd.read_csv("csv_files/encoded_labels.csv")
 
-    for row in df.iterrows():
+    # do not remove index
+    for index,row in df.iterrows():
         town = row["VALUE"]
         label = row["LABEL"]
         if value == town:
@@ -25,18 +26,18 @@ def predictPrice(town,flat_type,storey_range,floor_area_sqm,flat_model,lease_com
     x = df.drop('resale_price',axis =1).values
     y = df['resale_price'].values
 
-    # x_test and y_test not used as model is taking in user inputs
+    # do not remove x_test and y_test
     x_train, x_test, y_train, y_test = train_test_split(x, y, test_size=0.3, random_state=101)
 
     current_year = datetime.datetime.now().year
 
     u_test = []
     u_test.append(current_year)
-    u_test.append(encode(town))
-    u_test.append(encode(flat_type))
-    u_test.append(encode(storey_range))
+    u_test.append(Encode(town))
+    u_test.append(Encode(flat_type))
+    u_test.append(Encode(storey_range))
     u_test.append(int(floor_area_sqm))
-    u_test.append(encode(flat_model))
+    u_test.append(Encode(flat_model))
     u_test.append(lease_commence_date)
 
     # User predictions using best model (XGBoost)

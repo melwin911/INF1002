@@ -1,4 +1,5 @@
 # This file uses GridSearchCV to obtain the best hyperparams
+# The bulk of the file is commented out as it takes a long time to optimize the models
 
 import warnings
 warnings.simplefilter('ignore')
@@ -18,15 +19,15 @@ from sklearn.linear_model import Lasso
 from sklearn.linear_model import Ridge
 from sklearn.model_selection import GridSearchCV
 
-df = pd.read_csv("csv_files/label_encoded_dataset.csv")
+# df = pd.read_csv("csv_files/label_encoded_dataset.csv")
 
-df = df.drop('street_name',axis=1)
-df = df.drop('block',axis=1)
+# df = df.drop('street_name',axis=1)
+# df = df.drop('block',axis=1)
 
-x = df.drop('resale_price',axis =1).values
-y = df['resale_price'].values
+# x = df.drop('resale_price',axis =1).values
+# y = df['resale_price'].values
 
-x_train, x_test, y_train, y_test = train_test_split(x, y, test_size=0.3, random_state=101)
+# x_train, x_test, y_train, y_test = train_test_split(x, y, test_size=0.3, random_state=101)
 
 # models = []
 # models.append(('KNN', KNeighborsRegressor()))
