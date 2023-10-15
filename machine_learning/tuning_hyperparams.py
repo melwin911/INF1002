@@ -21,7 +21,6 @@ from sklearn.model_selection import GridSearchCV
 df = pd.read_csv("csv_files/label_encoded_dataset.csv")
 
 df = df.drop('street_name',axis=1)
-df = df.drop('flat_model',axis=1)
 df = df.drop('block',axis=1)
 
 x = df.drop('resale_price',axis =1).values
@@ -150,3 +149,19 @@ x_train, x_test, y_train, y_test = train_test_split(x, y, test_size=0.3, random_
 # test_predictions = best_knn.predict(x_test)
 # rmse = (MSE(y_test, test_predictions)) ** (1/2)
 # print(f"Second Iteration KNN RMSE:% f" %(rmse))
+
+# tuned_models = []
+# tuned_models.append(('KNN', KNeighborsRegressor(algorithm='auto', weights='distance')))
+# tuned_models.append(('MLR', LinearRegression(copy_X=True, fit_intercept=True, n_jobs=None, positive=False)))
+# tuned_models.append(('XGB', XGBRegressor(colsample_bytree=0.5, gamma=0, learning_rate=0.3, max_depth=10, min_child_weight=1, subsample=1)))
+# tuned_models.append(('LSO', Lasso(alpha=1.0, copy_X=True, fit_intercept=True, max_iter=1000, positive=False, precompute=False, warm_start=True)))
+# tuned_models.append(('RDG', Ridge(alpha=2.0, copy_X=False, fit_intercept=True, max_iter=500, positive=False, solver='sag')))
+
+# # 2nd iteration training and testing
+# for name, model in tuned_models:
+#     model.fit(x_train, y_train)
+#     test_predictions = model.predict(x_test)
+#     rmse = (MSE(y_test, test_predictions)) ** (1/2)
+    
+#     # Root mean squared error and report
+#     print(f"2nd Iteration {name} RMSE:% f" %(rmse))
