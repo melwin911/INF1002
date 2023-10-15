@@ -1,8 +1,4 @@
-import numpy as np
 import pandas as pd
-
-
-
 
 #combine the address, names , street name into 1
 def get_hdb_list():

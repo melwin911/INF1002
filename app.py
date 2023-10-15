@@ -1,7 +1,7 @@
 from flask import Flask, jsonify, request, render_template
 from flask_cors import CORS
-from machine_learning.machinelearning import predictPrice
-from amenities.getAmenities import*
+from machine_learning.machine_learning import predictPrice
+from amenities.get_amenities import*
 
 # instantiate the app
 app = Flask(__name__)
