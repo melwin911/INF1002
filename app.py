@@ -14,9 +14,10 @@ CORS(app, resources={r'/*': {'origins': '*'}})
 # dummy hdb data 
 HDBs = []
 
-Ammenities = []
+Amenities = []
 
 selected_town = 0
+
 
 @app.route('/town', methods=['GET'])
 def town():
@@ -27,10 +28,12 @@ def town():
 
     return jsonify(town_column)
 
+
 @app.route('/selectedtown', methods=['GET'])
 def selectedt_town():
 
     return jsonify(selected_town)
+
 
 @app.route('/resale', methods=['GET'])
 def resale_by_town():
@@ -50,6 +53,7 @@ def resale_by_town():
     return jsonify(aggregated_data_list)
 
     # return jsonify(variable1=resaleprice_column, variable2=year_column)
+
 
 @app.route('/resale_floorarea', methods=['GET'])
 def resale_by_floorarea():
@@ -75,8 +79,8 @@ def resale_by_floorarea():
     # return jsonify(variable1=resaleprice_column, variable2=year_column)
 
 
-@app.route('/ammenities', methods=['GET', 'POST'])
-def all_ammenities():
+@app.route('/amenities', methods=['GET', 'POST'])
+def all_amenities():
 
     response_object = {'status': 'success'}
 
@@ -85,74 +89,67 @@ def all_ammenities():
         post_data = request.get_json()
         postal_code = post_data.get('postal')
 
-        """df = pd.read_csv('Data/final_sorted.csv')
-        data = df.loc[df['postal'] == post_data.get('postal')]
-        def get_amenities(): 
-            amenities = [] 
-            for col in data.columns: 
-                amenities.append(data[col].tolist()) 
-            myIndices = [3,4,6,7,9,10,12,13,15,16,18,19] 
-            flattened = [val for sublist in amenities for val in sublist] 
-            flattened = [flattened[i] for i in myIndices] 
-            grouped_list = [flattened[i:i+2] for i in range(0, len(flattened), 2)] 
-            return [{"amenity": item[0], "distance": item[1] * 1000} for item in grouped_list]"""
+        """Append values from datafile selected by postal code input to a dictionary in Amenities[]. 
+         Values are gotten from passing the postal code input to its relevant getter function, from the getter function 
+         file, getAmenities.py. Placeholders are used for the values which will not be displayed on the frontend 
+         Accordion.vue page.
+         """
 
-
-        Ammenities.append({
+        Amenities.append({
 
             'town': 'TownPlaceholder',
 
-            'flat':  getFlat(int(post_data.get('postal'))),
+            'flat':  getFlat(int(postal_code)),
 
-            'postal': post_data.get('postal'),
+            'postal': postal_code,
 
-            'park': getPark(int(post_data.get('postal'))),
+            'park': getPark(int(postal_code)),
 
-            'park_dist': getParkDist(int(post_data.get('postal'))),
+            'park_dist': getParkDist(int(postal_code)),
 
-            'num_park_2km': 'TownPlaceholder',
+            'num_park_2km': 'NumParkPlaceholder',
 
-            'mall': getMall(int(post_data.get('postal'))),
+            'mall': getMall(int(postal_code)),
 
-            'mall_dist': getMallDist(int(post_data.get('postal'))),
+            'mall_dist': getMallDist(int(postal_code)),
 
-            'num_mall_2km': 'TownPlaceholder',
+            'num_mall_2km': 'NumMallPlaceholder',
             
-            'top_school': getTopSchool(int(post_data.get('postal'))),
+            'top_school': getTopSchool(int(postal_code)),
             
-            'top_school_dist': getTopSchoolDist(int(post_data.get('postal'))),
+            'top_school_dist': getTopSchoolDist(int(postal_code)),
 
-            'num_top_school_2km': 'TownPlaceholder',
+            'num_top_school_2km': 'NumTopSchoolPlaceholder',
 
-            'hawker': getHawker(int(post_data.get('postal'))),
+            'hawker': getHawker(int(postal_code)),
 
-            'hawker_dist': getHawkerDist(int(post_data.get('postal'))),
+            'hawker_dist': getHawkerDist(int(postal_code)),
 
-            'num_hawker_2km': 'TownPlaceholder',
+            'num_hawker_2km': 'NumHawkerPlaceholder',
 
-            'station_name': getStationName(int(post_data.get('postal'))),
+            'station_name': getStationName(int(postal_code)),
 
-            'station_dist': getStationDist(int(post_data.get('postal'))),
+            'station_dist': getStationDist(int(postal_code)),
 
-            'num_station_2km': 'TownPlaceholder',
+            'num_station_2km': 'NumStationPlaceholder',
 
-            'station_name_2027_onwards': getUpcomingStationName(int(post_data.get('postal'))),
+            'station_name_2027_onwards': getUpcomingStationName(int(postal_code)),
 
-            'station_dist_2027_onwards': getUpcomingStationDist(int(post_data.get('postal'))),
+            'station_dist_2027_onwards': getUpcomingStationDist(int(postal_code)),
 
-            'num_station_2km_2027_onwards': 'TownPlaceholder',
+            'num_station_2km_2027_onwards': 'NumUpcomingStationPlaceholder',
 
-            'num_of_new_stations_added_here': 'TownPlaceholder',
+            'num_of_new_stations_added_here': 'NumStationsAddedPlaceholder',
 
-            'resale_price': 'TownPlaceholder',
+            'resale_price': 'ResalePricePlaceholder',
         })
 
         # Call the function to get latitude and longitude
 
-        response_object['message'] = 'Priced!'
+        response_object['message'] = 'Amenities Displayed!'
     else:
 
-        response_object['Ammenities'] = Ammenities
+        response_object['amenities'] = Amenities
 
     return jsonify(response_object)
 

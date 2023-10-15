@@ -9,7 +9,7 @@ Note: it does not get the postal code value because the postal code has already 
 df = pd.read_csv('final_sorted.csv') 
 
 
-#getTown
+# getTown
 def getTown(intPostal):
     postal = str(intPostal)
     row = df.loc[df['postal'] == postal]
@@ -18,7 +18,8 @@ def getTown(intPostal):
     town = row['town'].iloc[0]
     return town
 
-#getFlat
+
+# getFlat
 def getFlat(intPostal):
     postal = str(intPostal)
     row = df.loc[df['postal'] == postal]
@@ -27,7 +28,8 @@ def getFlat(intPostal):
     flat = row['flat'].iloc[0]
     return flat
 
-#getPark
+
+# getPark
 def getPark(intPostal):
     postal = str(intPostal)
     row = df.loc[df['postal'] == postal]
@@ -36,7 +38,8 @@ def getPark(intPostal):
     park = row['park'].iloc[0]
     return park
 
-#getParkDist
+
+# getParkDist
 def getParkDist(intPostal):
     postal = str(intPostal)
     row = df.loc[df['postal'] == postal]
@@ -45,7 +48,8 @@ def getParkDist(intPostal):
     parkDist = row['park_dist'].iloc[0]
     return parkDist
 
-#getNumPark
+
+# getNumPark
 def getNumPark(intPostal):
     postal = str(intPostal)
     row = df.loc[df['postal'] == postal]
@@ -54,7 +58,8 @@ def getNumPark(intPostal):
     numPark = row['num_park_2km'].iloc[0]
     return numPark
 
-#getMall
+
+# getMall
 def getMall(intPostal):
     postal = str(intPostal)
     row = df.loc[df['postal'] == postal]
@@ -63,7 +68,8 @@ def getMall(intPostal):
     mall = row['mall'].iloc[0]
     return mall
 
-#getMallDist
+
+# getMallDist
 def getMallDist(intPostal):
     postal = str(intPostal)
     row = df.loc[df['postal'] == postal]
@@ -72,7 +78,8 @@ def getMallDist(intPostal):
     mallDist = row['mall_dist'].iloc[0]
     return mallDist
 
-#getNumMall
+
+# getNumMall
 def getNumMall(intPostal):
     postal = str(intPostal)
     row = df.loc[df['postal'] == postal]
@@ -81,7 +88,8 @@ def getNumMall(intPostal):
     numMall = row['num_mall_2km'].iloc[0]
     return numMall
 
-#getTopSchool
+
+# getTopSchool
 def getTopSchool(intPostal):
     postal = str(intPostal)
     row = df.loc[df['postal'] == postal]
@@ -90,7 +98,8 @@ def getTopSchool(intPostal):
     topSchool = row['top_school'].iloc[0]
     return topSchool
 
-#getTopSchoolDistance
+
+# getTopSchoolDistance
 def getTopSchoolDist(intPostal):
     postal = str(intPostal)
     row = df.loc[df['postal'] == postal]
@@ -99,7 +108,8 @@ def getTopSchoolDist(intPostal):
     topSchoolDist = row['top_school_dist'].iloc[0]
     return topSchoolDist
 
-#getNumTopSchool
+
+# getNumTopSchool
 def getNumTopSchool(intPostal):
     postal = str(intPostal)
     row = df.loc[df['postal'] == postal]
@@ -108,7 +118,8 @@ def getNumTopSchool(intPostal):
     getNumTopSchool = row['num_top_school_2km'].iloc[0]
     return getNumTopSchool
 
-#getHawker
+
+# getHawker
 def getHawker(intPostal):
     postal = str(intPostal)
     row = df.loc[df['postal'] == postal]
@@ -117,7 +128,8 @@ def getHawker(intPostal):
     hawker = row['hawker'].iloc[0]
     return hawker
 
-#getHawkerDist
+
+# getHawkerDist
 def getHawkerDist(intPostal):
     postal = str(intPostal)
     row = df.loc[df['postal'] == postal]
@@ -126,7 +138,8 @@ def getHawkerDist(intPostal):
     hawkerDist = row['hawker_dist'].iloc[0]
     return hawkerDist
 
-#getNumHawker
+
+# getNumHawker
 def getNumHawker(intPostal):
     postal = str(intPostal)
     row = df.loc[df['postal'] == postal]
@@ -135,7 +148,8 @@ def getNumHawker(intPostal):
     numHawker = row['num_hawker_2km'].iloc[0]
     return numHawker
 
-#getStationName
+
+# getStationName
 def getStationName(intPostal):
     postal = str(intPostal)
     row = df.loc[df['postal'] == postal]
@@ -144,7 +158,8 @@ def getStationName(intPostal):
     stationName = row['station_name'].iloc[0]
     return stationName
 
-#getStationDist
+
+# getStationDist
 def getStationDist(intPostal):
     postal = str(intPostal)
     row = df.loc[df['postal'] == postal]
@@ -153,7 +168,8 @@ def getStationDist(intPostal):
     stationDist = row['station_dist'].iloc[0]
     return stationDist
 
-#getNumStation
+
+# getNumStation
 def getNumStation(intPostal):
     postal = str(intPostal)
     row = df.loc[df['postal'] == postal]
@@ -162,7 +178,8 @@ def getNumStation(intPostal):
     numStation = row['num_station_2km'].iloc[0]
     return numStation
 
-#getUpcomingStationName
+
+# getUpcomingStationName
 def getUpcomingStationName(intPostal):
     postal = str(intPostal)
     row = df.loc[df['postal'] == postal]
@@ -171,7 +188,8 @@ def getUpcomingStationName(intPostal):
     upcomingStationName = row['station_name_2027_onwards'].iloc[0]
     return upcomingStationName
 
-#getUpcomingStationDist
+
+# getUpcomingStationDist
 def getUpcomingStationDist(intPostal):
     postal = str(intPostal)
     row = df.loc[df['postal'] == postal]
@@ -180,7 +198,8 @@ def getUpcomingStationDist(intPostal):
     upcomingStationDist = row['station_dist_2027_onwards'].iloc[0]
     return upcomingStationDist
 
-#getNumUpcomingStation
+
+# getNumUpcomingStation
 def getNumUpcomingStation(intPostal):
     postal = str(intPostal)
     row = df.loc[df['postal'] == postal]
@@ -189,7 +208,8 @@ def getNumUpcomingStation(intPostal):
     numUpcomingStation = row['num_station_2km_2027_onwards'].iloc[0]
     return numUpcomingStation
 
-#getNumStationsAdded
+
+# getNumStationsAdded
 def getNumStationsAdded(intPostal):
     postal = str(intPostal)
     row = df.loc[df['postal'] == postal]
@@ -198,7 +218,8 @@ def getNumStationsAdded(intPostal):
     numStationsAdded = row['num_of_new_stations_added_here'].iloc[0]
     return numStationsAdded
 
-#getResalePrice
+
+# getResalePrice
 def getResalePrice(intPostal):
     postal = str(intPostal)
     row = df.loc[df['postal'] == postal]

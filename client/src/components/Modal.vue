@@ -311,8 +311,3 @@ export default {
     },
 };
 </script>
-
-<style>
-/* Add Font Awesome styles */
-@import 'node_modules/font-awesome/css/font-awesome.min.css';
-</style>
