@@ -1,0 +1,169 @@
+import warnings
+warnings.simplefilter('ignore')
+import numpy as np
+import pandas as pd
+from sklearn.preprocessing import LabelEncoder
+from sklearn import model_selection
+from sklearn.linear_model import LogisticRegression
+from sklearn.model_selection import train_test_split
+from sklearn.metrics import mean_squared_error as MSE
+from sklearn.model_selection import train_test_split
+from sklearn.linear_model import LinearRegression
+from sklearn.neighbors import KNeighborsRegressor
+from xgboost import XGBRegressor
+from sklearn.linear_model import Lasso
+from sklearn.linear_model import Ridge
+import datetime
+
+# Encodes string value to a label
+def Encode(value):
+    df = pd.read_csv("labels.csv")
+
+    for index,row in df.iterrows():
+        town = row["VALUE"]
+        label = row["LABEL"]
+        if value == town:
+            return label
+
+def predictPrice(town,flat_type,storey_range,floor_area_sqm,flat_model,lease_commence_date):
+    # Read the CSV file, save as dataframe (df)
+    # Data taken from 2012 onwards as earlier years contain missing data
+    # df = pd.read_csv("2012_onwards_sorted_output.csv")
+
+    # Peek unique town values
+    # print(df['town'].unique())
+    # print(len(df['town'].unique()))
+
+    # One Hot Encoding produces +26 columns. High dimensionality not suitable for ML.
+    # Label encoding does not produce new features unlike OHE, but ML models may misinterpret numbers for hierachy.
+    # labelEncoder = LabelEncoder()
+    # df["town"] = labelEncoder.fit_transform(df["town"])
+    # df["storey_range"] = labelEncoder.fit_transform(df["storey_range"])
+    # df["flat_type"] = labelEncoder.fit_transform(df["flat_type"])
+    # df["flat_model"] = labelEncoder.fit_transform(df["flat_model"])
+
+    # le_df = 'le_df.csv'
+    # df.to_csv(le_df, index=False)
+    # print('Encoded CSV file saved at:', le_df)
+
+    df = pd.read_csv("le_df.csv")
+
+    # Correlation matrix and heatmap
+    # corr_matrix = df.corr(numeric_only=True)
+    # k = 7
+    # cols = corr_matrix.nlargest(k, 'resale_price')['resale_price'].index
+    # cm = np.corrcoef(df[cols].values.T)
+    # sns.set(font_scale=1.25)
+    # hm = sns.heatmap(cm,  fmt='.2f', annot=True, annot_kws={'size': 10}, yticklabels=cols.values, xticklabels=cols.values)
+    # plt.show()
+    # print(df)
+
+    # Drop some unnecessary columns
+    df = df.drop('street_name',axis=1)
+    df = df.drop('block',axis=1)
+
+    x = df.drop('resale_price',axis =1).values
+    y = df['resale_price'].values
+
+    x_train, x_test, y_train, y_test = train_test_split(x, y, test_size=0.3, random_state=101)
+
+    models = []
+    models.append(('KNN', KNeighborsRegressor()))
+    models.append(('MLR', LinearRegression()))
+    models.append(('XGB', XGBRegressor()))
+    models.append(('LSO', Lasso()))
+    models.append(('RDG', Ridge()))
+
+    # 1st iteration training and testing
+    for name, model in models:
+        model.fit(x_train, y_train)
+        test_predictions = model.predict(x_test)
+        rmse = (MSE(y_test, test_predictions)) ** (1/2)
+
+        # Root mean squared error and report
+        print(f"1st Iteration {name} RMSE:% f" %(rmse))
+
+        # Visualizing predictions
+        # fig = plt.figure(figsize=(10,5))
+        # plt.scatter(y_test,test_predictions)
+        # plt.plot(y_test,y_test,'r')
+        # plt.ticklabel_format(style='plain', axis='y')
+        # plt.ticklabel_format(style='plain', axis='x')
+        # plt.show()
+
+    # Refer to tuning_hyperparams.py to see how best hyperparams were derived
+    tuned_models = []
+    tuned_models.append(('KNN', KNeighborsRegressor(algorithm='auto', weights='distance')))
+    tuned_models.append(('MLR', LinearRegression(copy_X=True, fit_intercept=True, n_jobs=None, positive=False)))
+    tuned_models.append(('XGB', XGBRegressor(colsample_bytree=0.5, gamma=0, learning_rate=0.3, max_depth=10, min_child_weight=1, subsample=1)))
+    tuned_models.append(('LSO', Lasso(alpha=1.0, copy_X=True, fit_intercept=True, max_iter=1000, positive=False, precompute=False, warm_start=True)))
+    tuned_models.append(('RDG', Ridge(alpha=2.0, copy_X=False, fit_intercept=True, max_iter=500, positive=False, solver='sag')))
+
+    # 2nd iteration training and testing
+    for name, model in tuned_models:
+        model.fit(x_train, y_train)
+        test_predictions = model.predict(x_test)
+        rmse = (MSE(y_test, test_predictions)) ** (1/2)
+
+        # Root mean squared error and report
+        print(f"2nd Iteration {name} RMSE:% f" %(rmse))
+
+        # Visualizing predictions
+        # fig = plt.figure(figsize=(10,5))
+        # plt.scatter(y_test,test_predictions)
+        # plt.plot(y_test,y_test,'r')
+        # plt.ticklabel_format(style='plain', axis='y')
+        # plt.ticklabel_format(style='plain', axis='x')
+        # plt.show()
+
+    # Prediction using user inputs
+
+    # Dummy data:
+    # 2012,0,1,3,45,5,1986 (actual price: 250000.0)
+    # 2012,0,3,1,92,12,1979 (actual price: 457000.0)
+
+    # u_input = input('Enter the year, town, flat type, storey range, floor area sqm and lease commence year:').split(",")
+    # u_year, u_town, u_flat_type, u_storey_range, u_floor_area_sqm, u_flat_model, u_lease_commence_year = u_input
+
+    current_year = datetime.datetime.now().year
+
+    u_test = []
+    u_test.append(current_year)
+    u_test.append(Encode(town))
+    u_test.append(Encode(flat_type))
+    u_test.append(Encode(storey_range))
+    u_test.append(int(floor_area_sqm))
+    u_test.append(Encode(flat_model))
+    u_test.append(lease_commence_date)
+
+    prediction = 0
+
+    # User predictions using all tuned models
+    for name, model in tuned_models:
+        u_prediction = model.predict([u_test])
+        # print(u_prediction[0]
+        print(f"Tuned {name} prediction: {u_prediction[0]}")
+
+        if name == "XGB":
+            prediction = u_prediction[0]
+
+    print("Prediction is " + str(prediction))
+    return prediction
+
+# Performances
+# 1st Iteration KNN RMSE: 48284.155479
+# 1st Iteration MLR RMSE: 101928.394069
+# 1st Iteration XGB RMSE: 35367.646736
+# 1st Iteration LSO RMSE: 101928.394098
+# 1st Iteration RDG RMSE: 101928.395343
+# ===
+# 2nd Iteration KNN RMSE: 46263.410001
+# 2nd Iteration MLR RMSE: 101928.394069
+# 2nd Iteration XGB RMSE: 31954.618113
+# 2nd Iteration LSO RMSE: 101928.394098
+# 2nd Iteration RDG RMSE: 101928.526047
+
+# Changes made from references:
+# 1) Label encoded more features
+# 2) Removed scaling for higher accuracy
+# 3) Tuned models for improved performance
