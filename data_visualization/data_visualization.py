@@ -1,9 +1,12 @@
+import warnings
+warnings.simplefilter('ignore')
+import matplotlib.pyplot as plt
+import seaborn as sns
 import numpy as np
 import pandas as pd
 from geopy.geocoders import Nominatim
 import folium
 from folium.plugins import HeatMap
-
 
 df = pd.read_csv("csv_files/resale_price_data.csv")
 
@@ -92,3 +95,28 @@ function toggleHeatmap() {
 
 heatmap_map.save("heatmap_map.html")
 print("Heatmap map created")
+
+# Histogram plot showing count of 'town'
+sns.histplot(x='town', data = df)
+plt.title('Count of Towns')
+plt.xticks(rotation=90)
+plt.show()
+
+# Line graph showing y='resale_price', x='year' 
+plt.figure(figsize=(14,5))
+sns.set_style("ticks")
+sns.lineplot(data=df,x="year",y='resale_price',color='firebrick')
+plt.xlabel('Year')
+plt.ylabel('Resale Price')
+sns.despine()
+plt.title("Resale price over time",size='x-large')
+plt.show()
+
+# Scatter Plot showing y = 'resale_price', x = 'floor_area_sqm' 
+sns.scatterplot(data=df, x="floor_area_sqm", y="resale_price")
+plt.title('Resale Price and floor area sqm')
+plt.xlabel('floor area sqm')
+plt.ylabel('Resale Price')
+# remove scientific notation
+plt.ticklabel_format(style='plain', axis='y')
+plt.show()
