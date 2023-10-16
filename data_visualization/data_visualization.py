@@ -96,12 +96,9 @@ function toggleHeatmap() {
 heatmap_map.save("heatmap_map.html")
 print("Heatmap map created")
 
-
-# running slow, requires optimization (sub-categorize year and resale price)
 # Scatter Plot showing y = 'resale_price', x = 'year' 
 
 # x_axis = df['year']
-
 # y_axis = df['resale_price']
 # plt.scatter(x_axis, y_axis)
 
@@ -109,7 +106,7 @@ print("Heatmap map created")
 # plt.xlabel('Year')
 # plt.ylabel('Resale Price')
 
-# # # # remove scientific notation
+# # remove scientific notation
 # plt.ticklabel_format(style='plain', axis='y')
 # plt.show()
 
