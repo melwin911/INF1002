@@ -1,8 +1,6 @@
 import numpy as np
 import pandas as pd
 # import seaborn as sns
-# import geopandas as gpd
-# import geopy
 from geopy.geocoders import Nominatim
 import folium
 from folium.plugins import HeatMap
@@ -95,52 +93,3 @@ function toggleHeatmap() {
 
 heatmap_map.save("heatmap_map.html")
 print("Heatmap map created")
-
-# Scatter Plot showing y = 'resale_price', x = 'year' 
-
-# x_axis = df['year']
-# y_axis = df['resale_price']
-# plt.scatter(x_axis, y_axis)
-
-# plt.title('Resale Price over years')
-# plt.xlabel('Year')
-# plt.ylabel('Resale Price')
-
-# # remove scientific notation
-# plt.ticklabel_format(style='plain', axis='y')
-# plt.show()
-
-# print(df['town'].unique())
-# print(len(df['town'].unique()))
-
-# One Hot Encoding produces +26 columns. High dimensionality not suitable for ML.
-# ohe_town = pd.get_dummies(df["town"]).astype(int)
-
-# df = pd.concat([df, ohe_town], axis="columns")
-
-# print(df)
-
-# ohe_df = 'ohe_df.csv'
-
-# df.to_csv(ohe_df, index=False)
-
-# print('Merged CSV file saved at:', ohe_df)
-
-# Label encoding does not produce new features unlike OHE, but ML models may misinterpret numbers for hierachy.
-
-# print('Merged CSV file saved at:', le_df)
-
-'''labelEncoder = LabelEncoder()
-df["le_town"] = labelEncoder.fit_transform(df["town"])
-le_df = 'le_df.csv'
-df.to_csv(le_df, index=False)'''
-
-'''corr_matrix = df1.corr(numeric_only=True)
-k = 7
-cols = corr_matrix.nlargest(k, 'resale_price')['resale_price'].index
-cm = np.corrcoef(df1[cols].values.T)
-sns.set(font_scale=1.25)
-hm = sns.heatmap(cm,  fmt='.2f', annot=True, annot_kws={'size': 10}, yticklabels=cols.values, xticklabels=cols.values)
-
-plt.show()'''
-
