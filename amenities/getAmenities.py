@@ -1,11 +1,9 @@
 import pandas as pd 
 
-
-# reading the amenities csv file
+# read the amenities csv file
 df = pd.read_csv('csv_files/amenities.csv')
 
-
-# function to retrieve town values from postal code input
+# retrieve town values from postal code input
 def getTown(intPostal):
     postal = str(intPostal)
     row = df.loc[df['postal'] == postal]
@@ -14,8 +12,7 @@ def getTown(intPostal):
     town = row['town'].iloc[0]
     return town
 
-
-# function to retrieve block and flat values from postal code input
+# retrieve block and flat values from postal code input
 def getFlat(intPostal):
     postal = str(intPostal)
     row = df.loc[df['postal'] == postal]
@@ -24,8 +21,7 @@ def getFlat(intPostal):
     flat = row['flat'].iloc[0]
     return flat
 
-
-# function to retrieve nearest park from postal code input
+# retrieve nearest park from postal code input
 def getPark(intPostal):
     postal = str(intPostal)
     row = df.loc[df['postal'] == postal]
@@ -34,8 +30,7 @@ def getPark(intPostal):
     park = row['park'].iloc[0]
     return park
 
-
-# function to retrieve nearest park distance from postal code input
+# retrieve nearest park distance from postal code input
 def getParkDist(intPostal):
     postal = str(intPostal)
     row = df.loc[df['postal'] == postal]
@@ -44,8 +39,7 @@ def getParkDist(intPostal):
     parkDist = row['park_dist'].iloc[0]
     return parkDist
 
-
-# function to retrieve how many park within 2km radius from postal code input
+# retrieve how many park within 2km radius from postal code input
 def getNumPark(intPostal):
     postal = str(intPostal)
     row = df.loc[df['postal'] == postal]
@@ -54,8 +48,7 @@ def getNumPark(intPostal):
     numPark = row['num_park_2km'].iloc[0]
     return numPark
 
-
-# function to retrieve nearest shopping mall from postal code input
+# retrieve nearest shopping mall from postal code input
 def getMall(intPostal):
     postal = str(intPostal)
     row = df.loc[df['postal'] == postal]
@@ -64,8 +57,7 @@ def getMall(intPostal):
     mall = row['mall'].iloc[0]
     return mall
 
-
-# function to retrieve nearest shopping mall distance from postal code input
+# retrieve nearest shopping mall distance from postal code input
 def getMallDist(intPostal):
     postal = str(intPostal)
     row = df.loc[df['postal'] == postal]
@@ -74,8 +66,7 @@ def getMallDist(intPostal):
     mallDist = row['mall_dist'].iloc[0]
     return mallDist
 
-
-# function to get how many shopping mall within 2km radius from postal code input
+# get how many shopping mall within 2km radius from postal code input
 def getNumMall(intPostal):
     postal = str(intPostal)
     row = df.loc[df['postal'] == postal]
@@ -84,8 +75,7 @@ def getNumMall(intPostal):
     numMall = row['num_mall_2km'].iloc[0]
     return numMall
 
-
-# function to retrieve any nearest top 50 schools from postal code input
+# retrieve any nearest top 50 schools from postal code input
 def getTopSchool(intPostal):
     postal = str(intPostal)
     row = df.loc[df['postal'] == postal]
@@ -94,8 +84,7 @@ def getTopSchool(intPostal):
     topSchool = row['top_school'].iloc[0]
     return topSchool
 
-
-# function to retrieve distance from any top 50 schools to postal code inputs
+# retrieve distance from any top 50 schools to postal code inputs
 def getTopSchoolDist(intPostal):
     postal = str(intPostal)
     row = df.loc[df['postal'] == postal]
@@ -104,8 +93,7 @@ def getTopSchoolDist(intPostal):
     topSchoolDist = row['top_school_dist'].iloc[0]
     return topSchoolDist
 
-
-# function to retrieve how many top 50 schools nearby within 2km radius from postal code input
+# retrieve how many top 50 schools nearby within 2km radius from postal code input
 def getNumTopSchool(intPostal):
     postal = str(intPostal)
     row = df.loc[df['postal'] == postal]
@@ -114,8 +102,7 @@ def getNumTopSchool(intPostal):
     getNumTopSchool = row['num_top_school_2km'].iloc[0]
     return getNumTopSchool
 
-
-# function to retrieve nearest hawker center from postal code input
+# retrieve nearest hawker center from postal code input
 def getHawker(intPostal):
     postal = str(intPostal)
     row = df.loc[df['postal'] == postal]
@@ -124,8 +111,7 @@ def getHawker(intPostal):
     hawker = row['hawker'].iloc[0]
     return hawker
 
-
-# function to retrieve distance from nearest hawker center to postal code input
+# retrieve distance from nearest hawker center to postal code input
 def getHawkerDist(intPostal):
     postal = str(intPostal)
     row = df.loc[df['postal'] == postal]
@@ -134,8 +120,7 @@ def getHawkerDist(intPostal):
     hawkerDist = row['hawker_dist'].iloc[0]
     return hawkerDist
 
-
-# function to retrieve how many hawker centers are there within 2km radius from postal code input
+# retrieve how many hawker centers are there within 2km radius from postal code input
 def getNumHawker(intPostal):
     postal = str(intPostal)
     row = df.loc[df['postal'] == postal]
@@ -144,8 +129,7 @@ def getNumHawker(intPostal):
     numHawker = row['num_hawker_2km'].iloc[0]
     return numHawker
 
-
-# function to retrieve nearest MRT station from postal code input
+# retrieve nearest MRT station from postal code input
 def getStationName(intPostal):
     postal = str(intPostal)
     row = df.loc[df['postal'] == postal]
@@ -154,8 +138,7 @@ def getStationName(intPostal):
     stationName = row['station_name'].iloc[0]
     return stationName
 
-
-# function to retrieve distance from nearest MRT station to postal code input
+# retrieve distance from nearest MRT station to postal code input
 def getStationDist(intPostal):
     postal = str(intPostal)
     row = df.loc[df['postal'] == postal]
@@ -164,8 +147,7 @@ def getStationDist(intPostal):
     stationDist = row['station_dist'].iloc[0]
     return stationDist
 
-
-# function to retrieve number of MRT stations within 2km radius of postal code input
+# retrieve number of MRT stations within 2km radius of postal code input
 def getNumStation(intPostal):
     postal = str(intPostal)
     row = df.loc[df['postal'] == postal]
@@ -174,8 +156,7 @@ def getNumStation(intPostal):
     numStation = row['num_station_2km'].iloc[0]
     return numStation
 
-
-# function to retrieve any upcoming MRT station from postal code input
+# retrieve any upcoming MRT station from postal code input
 def getUpcomingStationName(intPostal):
     postal = str(intPostal)
     row = df.loc[df['postal'] == postal]
@@ -184,8 +165,7 @@ def getUpcomingStationName(intPostal):
     upcomingStationName = row['station_name_2027_onwards'].iloc[0]
     return upcomingStationName
 
-
-# function to retrieve distance from any upcoming MRT stations to postal code input
+# retrieve distance from any upcoming MRT stations to postal code input
 def getUpcomingStationDist(intPostal):
     postal = str(intPostal)
     row = df.loc[df['postal'] == postal]
@@ -194,8 +174,7 @@ def getUpcomingStationDist(intPostal):
     upcomingStationDist = row['station_dist_2027_onwards'].iloc[0]
     return upcomingStationDist
 
-
-# function to retrieve number of upcoming MRT stations within 2km radius of postal code input
+# retrieve number of upcoming MRT stations within 2km radius of postal code input
 def getNumUpcomingStation(intPostal):
     postal = str(intPostal)
     row = df.loc[df['postal'] == postal]
@@ -204,8 +183,7 @@ def getNumUpcomingStation(intPostal):
     numUpcomingStation = row['num_station_2km_2027_onwards'].iloc[0]
     return numUpcomingStation
 
-
-# function to retrieve number of MRT station added within 2km radius of postal code input
+# retrieve number of MRT station added within 2km radius of postal code input
 def getNumStationsAdded(intPostal):
     postal = str(intPostal)
     row = df.loc[df['postal'] == postal]
@@ -214,8 +192,7 @@ def getNumStationsAdded(intPostal):
     numStationsAdded = row['num_of_new_stations_added_here'].iloc[0]
     return numStationsAdded
 
-
-# function to retrieve resale price of any flat based on postal code input 
+# retrieve resale price of any flat based on postal code input 
 def getResalePrice(intPostal):
     postal = str(intPostal)
     row = df.loc[df['postal'] == postal]
