@@ -1,10 +1,8 @@
-import numpy as np
 import pandas as pd
 import requests
 import json
 from geopy.distance import geodesic
 import schoolScraper , hdbScraper , StationScraper , parkScraper , mallScraper , hawkerScraper
-
 
 def find_postal(lst, filename):  
     for index,add in enumerate(lst):
@@ -48,8 +46,6 @@ def find_nearest(house, amenity, radius=2):
 
 # find_postal(hdbScraper.get_hdb_list(), 'Data/Coordinates/hdb_coordinates')
 
-
-
 def find_nearest_school_hdb():
     nearest_school = find_nearest(hdbScraper.get_hdb_coordinates(), schoolScraper.get_school_coordinates())
     flat_top_school = pd.DataFrame.from_dict(nearest_school).T
@@ -74,9 +70,6 @@ def find_nearest_hawker_hdb():
     flat_hawker = flat_hawker.rename(columns={0: 'flat', 1: 'hawker', 2: 'hakwer_dist', 3: 'num_hawker_2km'}).reset_index().drop(['index'], axis=1)
     flat_hawker.to_csv('Data/Flat_amenities/hdb_hawker.csv', index=False)
 
-
-
-
 #for all stations including new plans
 def find_nearest_station_hdb_new():
     nearest_station_new = find_nearest(hdbScraper.get_hdb_coordinates(), StationScraper.get_new_station_coordinates())
@@ -89,7 +82,6 @@ def find_nearest_station_hdb_current():
     flat_station_current = pd.DataFrame.from_dict(nearest_station).T
     flat_station_current = flat_station_current.rename(columns={0: 'flat', 1: 'station_name', 2: 'station_dist', 3: 'num_station_2km'}).reset_index().drop(['index'], axis=1)
     flat_station_current.to_csv('Data/Flat_amenities/hdb_stations_current.csv' , index=False)
-
 
 # find_nearest_school_hdb()
 # find_nearest_park_hdb()
@@ -106,7 +98,6 @@ def merge_stations():
     hdb_station['num_of_new_stations_added_here'] = hdb_station['num_of_new_stations_added_here'].clip(lower=0)
     hdb_station.to_csv('Data/Flat_amenities/hdb_final_stations.csv' , index=False)
 
-
 def merge_amenities():
     park_hdb = pd.read_csv('Data/Flat_amenities/hdb_park.csv')
     mall_hdb = pd.read_csv('Data/Flat_amenities/hdb_mall.csv')
@@ -120,4 +111,3 @@ def merge_amenities():
     columns_to_round = [col for col in hdb_amenities.columns if 'dist' in col]
     hdb_amenities[columns_to_round] = hdb_amenities[columns_to_round].round(2)
     hdb_amenities.to_csv('Data/Flat_amenities/final_amenities_merged.csv',index=False)
-

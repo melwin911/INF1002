@@ -1,9 +1,6 @@
 from bs4 import BeautifulSoup
-import requests
 import pandas as pd
-import numpy as np
 import urllib.request
-
 
 def station_to_csv():
     user_agent = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/117.0.0.0 Safari/537.36'
@@ -14,7 +11,6 @@ def station_to_csv():
     request=urllib.request.Request(url,None,headers)
     response = urllib.request.urlopen(request)
     data = response.read()
-
 
     soup = BeautifulSoup(data)
     table = soup.find_all('table')[0]
@@ -34,9 +30,7 @@ def station_to_csv():
 
     df.to_csv('Data/allStationNames.csv' , index=False)
 
-
-
-#read  the csv and filter out new stations
+#read the csv and filter out new stations
 #return new stations name
 
 def get_new_stations_list():
@@ -65,4 +59,3 @@ def get_current_station_coordinates():
     station_coord = station_coord.drop_duplicates(subset=['address'])
     station_coord = station_coord.reset_index(drop=True)
     return station_coord
-

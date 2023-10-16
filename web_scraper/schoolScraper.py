@@ -10,12 +10,10 @@ page = requests.get(url)
 soup = BeautifulSoup(page.text , 'html.parser')
 table = soup.find_all('table')[1]
 
-
 table_titles = table.find_all('th')
 school_table_titles = [title.text for title in table_titles]
 
 df = pd.DataFrame(columns=school_table_titles)
-
 
 column_data = table.find_all('tr')
 
@@ -31,7 +29,6 @@ for row in column_data[1:]:
         df.loc[length] = individual_row_data
 
     previous_row_data = individual_row_data
-
 
 #get the top 50 schools in sg
 df.index = np.arange(1, len(df) + 1)
@@ -49,4 +46,3 @@ def get_school_coordinates():
     school_coord = school_coord.drop_duplicates(subset=['address'])
     school_coord = school_coord.reset_index(drop=True)
     return school_coord
-

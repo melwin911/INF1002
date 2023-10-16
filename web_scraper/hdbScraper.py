@@ -1,8 +1,4 @@
-import numpy as np
 import pandas as pd
-
-
-
 
 #combine the address, names , street name into 1
 def get_hdb_list():
@@ -24,4 +20,3 @@ def get_hdb_postal():
     hdb_postal = hdb_postal.drop_duplicates(subset=['flat'])
     hdb_postal = hdb_postal.reset_index(drop=True)
     return hdb_postal.pop('POSTAL')
-

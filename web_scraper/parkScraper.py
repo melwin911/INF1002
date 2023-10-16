@@ -1,7 +1,6 @@
 from bs4 import BeautifulSoup
 import requests
 import pandas as pd
-import numpy as np
 
 url='https://en.wikipedia.org/wiki/List_of_parks_in_Singapore'
 page = requests.get(url)
@@ -34,4 +33,3 @@ def get_park_coordinates():
     park_coord = park_coord.drop_duplicates(subset=['address'])
     park_coord = park_coord.reset_index(drop=True)
     return park_coord
-
