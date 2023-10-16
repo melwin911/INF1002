@@ -22,8 +22,8 @@ These are the key features of the project:
 
 - Web scraper to supplement open-source dataset (`/web-scraper`)
 - Data Analysis techniques and Visualization tools (`/data_visualization/data-visualization.py`)
-- Machine Learning (`/machine_learning/machinelearning.py`)
-- Predictive Analysis with Hyperparameters Tuning (`/machine_learning/machinelearning.py` and `/machine_learning/tuning_hyperparam.py`)
+- Machine Learning (`/machine_learning/machine_learning.py`)
+- Predictive Analysis with Hyperparameters Tuning (`/machine_learning/machine_learning.py` and `/machine_learning/tuning_hyperparam.py`)
 - Graphical User Interface (`client/src/App.vue`)
 
 

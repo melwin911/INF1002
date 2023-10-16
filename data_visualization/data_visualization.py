@@ -1,6 +1,5 @@
 import numpy as np
 import pandas as pd
-# import seaborn as sns
 from geopy.geocoders import Nominatim
 import folium
 from folium.plugins import HeatMap
