@@ -28,7 +28,7 @@ def get_park_list():
     return all_park_names
 
 def get_park_coordinates():
-    park_coord = pd.read_csv('Data/Coordinates/park_coordinates.csv')
+    park_coord = pd.read_csv('web_scraper/Data/Coordinates/park_coordinates.csv')
     park_coord = park_coord[['address','LATITUDE','LONGITUDE']]
     park_coord = park_coord.drop_duplicates(subset=['address'])
     park_coord = park_coord.reset_index(drop=True)

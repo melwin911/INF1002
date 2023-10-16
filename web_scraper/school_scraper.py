@@ -41,7 +41,7 @@ def get_school_list():
 
 def get_school_coordinates():
     #filter to address , X , Y and remove duplicates
-    school_coord = pd.read_csv('Data/Coordinates/School_coordinates.csv')
+    school_coord = pd.read_csv('web_scraper/Data/Coordinates/School_coordinates.csv')
     school_coord = school_coord[['address','LATITUDE','LONGITUDE']]
     school_coord = school_coord.drop_duplicates(subset=['address'])
     school_coord = school_coord.reset_index(drop=True)

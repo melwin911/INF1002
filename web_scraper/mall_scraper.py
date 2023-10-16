@@ -15,11 +15,10 @@ def get_mall_list():
     return mall_lst
 
 def get_mall_coordinates():
-    mall_coord = pd.read_csv('Data/Coordinates/mall_coordinates.csv')
+    mall_coord = pd.read_csv('web_scraper/Data/Coordinates/mall_coordinates.csv')
     mall_coord = mall_coord[['address','LATITUDE','LONGITUDE']]
     mall_coord = mall_coord.drop_duplicates(subset=['address'])
     mall_coord = mall_coord.reset_index(drop=True)
     mall_coord['address'] = mall_coord['address'].str.split('[').str[0]
     return mall_coord.head(27)
 
-print(get_mall_coordinates())

@@ -28,33 +28,33 @@ def station_to_csv():
         df.loc[length] = individual_row_data
 
 
-    df.to_csv('Data/allStationNames.csv' , index=False)
+    df.to_csv('web_scraper/Data/allStationNames.csv' , index=False)
 
 #read the csv and filter out new stations
 #return new stations name
 
 def get_new_stations_list():
-    all_stations = pd.read_csv("Data/allStationNames.csv")
+    all_stations = pd.read_csv("web_scraper/Data/allStationNames.csv")
     all_stations_names = list(all_stations['MRT Station English Name'])
     new_staions = set(all_stations_names)
     return list(new_staions)
 
 def get_new_station_coordinates():
     #filter to address , X , Y and remove duplicates
-    station_coord = pd.read_csv('Data/Coordinates/stations_coordinates.csv')
+    station_coord = pd.read_csv('web_scraper/Data/Coordinates/stations_coordinates.csv')
     station_coord = station_coord[['address','LATITUDE','LONGITUDE']]
     station_coord = station_coord.drop_duplicates(subset=['address'])
     station_coord = station_coord.reset_index(drop=True)
     return station_coord
 
 def get_current_stations_list():
-    current_stations = pd.read_csv("Data/CurrentStations.csv")
+    current_stations = pd.read_csv("web_scraper/Data/CurrentStations.csv")
     current_stations_names = list(current_stations['mrt_station_english'])
     current_staions = set(current_stations_names)
     return list(current_staions)
 
 def get_current_station_coordinates():
-    station_coord = pd.read_csv('Data/Coordinates/current_stations_coordinates.csv')
+    station_coord = pd.read_csv('web_scraper/Data/Coordinates/current_stations_coordinates.csv')
     station_coord = station_coord[['address','LATITUDE','LONGITUDE']]
     station_coord = station_coord.drop_duplicates(subset=['address'])
     station_coord = station_coord.reset_index(drop=True)
