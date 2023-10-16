@@ -5,7 +5,6 @@ import pandas as pd
 # import geopy
 from geopy.geocoders import Nominatim
 import folium
-from folium.plugins import MarkerCluster
 from folium.plugins import HeatMap
 
 
@@ -24,7 +23,6 @@ for town in towns:
         if loc:
             latitude.append(loc.latitude)
             longitude.append(loc.longitude)
-            #print('Geographical coordinates for {}: {}, {}'.format(town, loc.latitude, loc.longitude))
         else:
             latitude.append(np.nan)
             longitude.append(np.nan)
@@ -51,22 +49,6 @@ dataframe = df.merge(df2, on='town', how='left')
 
 df2 = df2.dropna(subset=['latitude', 'longitude'])
 merged_data = df2.merge(resale_price_data, on='town', how='left')
-
-test_map = folium.Map(location=[1.3521, 103.8198], zoom_start=13)
-marker_cluster = MarkerCluster().add_to(test_map)
-
-for index, row in df2.iterrows():
-    popup_info = f"<strong>{row['town']}</strong><br>Lat: {row['latitude']},Lon: {row['longitude']}",
-    tooltip_info = f"Click for more info about {row['town']}",
-    folium.Marker(
-        location=(row['latitude'], row['longitude']),
-        popup=popup_info,
-        icon=folium.Icon(color='blue',icon='info-sign'),
-        tooltip=tooltip_info,
-    ).add_to(marker_cluster)
-
-test_map.save("test_map1.html")
-print("test_map created")
 
 heat_data = merged_data[['latitude', 'longitude', 'resale_price']]
 
@@ -114,15 +96,6 @@ function toggleHeatmap() {
 heatmap_map.save("heatmap_map.html")
 print("Heatmap map created")
 
-'''folium_map = folium.Map(location=[1.3521,103.8198],
-                        zoom_start=12,
-                        tiles='CartoDB dark_matter')
-
-
-FastMarkerCluster(data=list(zip(dataframe['latitude'].values, dataframe['longitude'].values))).add_to(folium_map)
-folium.LayerControl().add_to(folium_map)
-dataframe.isnull().sum()
-folium_map.show_in_browser()'''
 
 # running slow, requires optimization (sub-categorize year and resale price)
 # Scatter Plot showing y = 'resale_price', x = 'year' 
