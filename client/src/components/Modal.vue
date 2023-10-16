@@ -11,7 +11,6 @@
         </button>
         <br><br>
         <div v-if="isLoading">
-          <!-- Display a loading indicator here -->
           <i class="fa fa-spinner fa-spin fa-2x"></i>
           <p>Loading...</p>
         </div>
@@ -226,14 +225,12 @@ export default {
     this.loaded = false
 
     try {
-      // Fetch the list of towns from your Flask API
       const response = await axios.get('http://localhost:5000/town');
       const allTowns = response.data;
 
       // Remove duplicates from the list of towns
       const uniqueTowns = [...new Set(allTowns)];
 
-      // Assign the unique towns to the component's data property
       this.towns = Object.values(uniqueTowns);
 
       console.log(Object.values(this.towns))
