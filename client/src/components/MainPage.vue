@@ -5,35 +5,22 @@
         </header>
         <div class="row-modal">
             <div v-if="isLoading">
-                <!-- Display a loading indicator here -->
                 <p>Loading...</p>
             </div>
             <div v-else>
-                <!-- Display the Modal when data is available -->
                 <Modal @send-town="updateData"/>
             </div>
         </div>
         <br><br>
-        
-        <!-- <div class="row">
-            <div class="container" style="float:left;width:100%">
-                <TestChart/>
-                <Chart :receivedData="dataReceived"/>
-            </div>
-            <div class="container" style="float:right;width:100%">
-                <LineChart :receivedData="dataReceived"/>
-            </div>
-        </div> -->
+	    
         <div class="row">
             <div class="col-md-6">
                 <div class="container">
-                <!-- Place your first chart component here -->
                 <Chart :receivedData="dataReceived" />
                 </div>
             </div>
             <div class="col-md-6">
                 <div class="container">
-                <!-- Place your second chart component here -->
                 <LineChart :receivedData="dataReceived" />
                 </div>
             </div>
