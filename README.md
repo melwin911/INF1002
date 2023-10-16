@@ -31,7 +31,7 @@ These are the key features of the project:
 
 The contents within this zip file and repository are as follows:
 
-* `amenities` folder - contains `getAmenities.py` file that accesses the respective column in `/csv_files/amenities.csv`. Given a postal code input, the function selects the corresponding row with that postal code and retrieves the value from the specified column.
+* `amenities` folder - contains `get_amenities.py` file that accesses the respective column in `/csv_files/amenities.csv`. Given a postal code input, the function selects the corresponding row with that postal code and retrieves the value from the specified column.
 * `client` folder - contains the source codes used to build our Graphical User Interface (GUI).
 * `csv_files` folder - contains all the processed csv files used for this project.
 * `data_visualization` folder - contains `data_visualization.py` file that has all the codes of basic charts we used to explore to gain deeper understanding of the data used.
