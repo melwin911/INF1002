@@ -11,7 +11,6 @@ app.config.from_object(__name__)
 # enable CORS
 CORS(app, resources={r'/*': {'origins': '*'}})
 
-# dummy hdb data 
 HDBs = []
 
 Amenities = []
@@ -44,10 +43,8 @@ def resale_by_town():
 
     filtered_data = df[df['town'] == selected_town]
 
-    # Group by year and calculate the average resale price
     aggregated_data = filtered_data.groupby('year')['resale_price'].mean().reset_index()
 
-    # Convert the aggregated data to a list of dictionaries
     aggregated_data_list = aggregated_data.to_dict(orient='records')
 
     return jsonify(aggregated_data_list)
@@ -64,10 +61,8 @@ def resale_by_floorarea():
 
     filtered_data = df[df['town'] == selected_town]
 
-    # Group by year and calculate the average resale price
     aggregated_data = filtered_data.groupby('floor_area_sqm')['resale_price'].mean().reset_index()
 
-    # Convert the aggregated data to a list of dictionaries
     aggregated_data_list = aggregated_data.to_dict(orient='records')
 
     return jsonify(aggregated_data_list)
