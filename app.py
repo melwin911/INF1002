@@ -1,7 +1,7 @@
 from flask import Flask, jsonify, request, render_template
 from flask_cors import CORS
 from machine_learning.machine_learning import predictPrice
-from amenities.getAmenities import*
+from amenities.get_amenities import*
 
 # instantiate the app
 app = Flask(__name__)
@@ -88,43 +88,43 @@ def all_amenities():
 
             'town': 'TownPlaceholder',
 
-            'flat':  getFlat(int(postal_code)),
+            'flat':  get_flat(int(postal_code)),
 
             'postal': postal_code,
 
-            'park': getPark(int(postal_code)),
+            'park': get_park(int(postal_code)),
 
-            'park_dist': getParkDist(int(postal_code)),
+            'park_dist': get_park_dist(int(postal_code)),
 
             'num_park_2km': 'NumParkPlaceholder',
 
-            'mall': getMall(int(postal_code)),
+            'mall': get_mall(int(postal_code)),
 
-            'mall_dist': getMallDist(int(postal_code)),
+            'mall_dist': get_mall_dist(int(postal_code)),
 
             'num_mall_2km': 'NumMallPlaceholder',
             
-            'top_school': getTopSchool(int(postal_code)),
+            'top_school': get_top_school(int(postal_code)),
             
-            'top_school_dist': getTopSchoolDist(int(postal_code)),
+            'top_school_dist': get_top_school_dist(int(postal_code)),
 
             'num_top_school_2km': 'NumTopSchoolPlaceholder',
 
-            'hawker': getHawker(int(postal_code)),
+            'hawker': get_hawker(int(postal_code)),
 
-            'hawker_dist': getHawkerDist(int(postal_code)),
+            'hawker_dist': get_hawker_dist(int(postal_code)),
 
             'num_hawker_2km': 'NumHawkerPlaceholder',
 
-            'station_name': getStationName(int(postal_code)),
+            'station_name': get_station_name(int(postal_code)),
 
-            'station_dist': getStationDist(int(postal_code)),
+            'station_dist': get_station_dist(int(postal_code)),
 
             'num_station_2km': 'NumStationPlaceholder',
 
-            'station_name_2027_onwards': getUpcomingStationName(int(postal_code)),
+            'station_name_2027_onwards': get_upcoming_station_name(int(postal_code)),
 
-            'station_dist_2027_onwards': getUpcomingStationDist(int(postal_code)),
+            'station_dist_2027_onwards': get_upcoming_station_dist(int(postal_code)),
 
             'num_station_2km_2027_onwards': 'NumUpcomingStationPlaceholder',
 
