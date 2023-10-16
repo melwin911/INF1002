@@ -20,7 +20,7 @@ This project focuses on predictive data analysis of HDB resale prices in Singapo
 
 These are the key features of the project:
 
-- Web scraper to supplement open-source dataset (`/web-scraper`)
+- Web scraper to supplement open-source dataset (`/web_scraper`)
 - Data Analysis techniques and Visualization tools (`/data_visualization/data_visualization.py`)
 - Machine Learning (`/machine_learning/machine_learning.py`)
 - Predictive Analysis with Hyperparameters Tuning (`/machine_learning/machine_learning.py` and `/machine_learning/tuning_hyperparam.py`)
