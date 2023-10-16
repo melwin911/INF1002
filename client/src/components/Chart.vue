@@ -27,7 +27,6 @@ export default {
     this.loaded = false
 
     try {
-      // Update chartData with the processed data
       this.chartData = {
         labels: [], 
         datasets: [
@@ -51,7 +50,6 @@ export default {
         try {
           console.log("fetch resale data")
 
-          // Make a GET request to your Flask API with the selected town as a query parameter
           const response = await axios.get(`http://localhost:5000/resale_floorarea?town=${this.receivedData}`);
           const data = response.data;
 
@@ -75,12 +73,11 @@ export default {
             ],
           };
 
-          // Set chart options (customize as needed)
           this.chartOptions = {
             responsive: true,
             scales: {
                 x: {
-                type: 'linear', // Set the x-axis scale type to linear
+                type: 'linear', 
                 position: 'bottom',
                 title: {
                     display: true,
@@ -88,7 +85,7 @@ export default {
                 },
                 },
                 y: {
-                type: 'linear', // Set the y-axis scale type to linear
+                type: 'linear', 
                 title: {
                     display: true,
                     text: 'Resale Price',
@@ -102,7 +99,6 @@ export default {
           console.error(error);
         }
       } else {
-        // Clear the chart data if no town is selected
         this.chartData.labels = [];
         this.chartData.datasets[0].data = [];
       }
