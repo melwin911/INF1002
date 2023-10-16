@@ -2,7 +2,7 @@ import pandas as pd
 import requests
 import json
 from geopy.distance import geodesic
-import schoolScraper , hdbScraper , StationScraper , parkScraper , mallScraper , hawkerScraper
+import school_scraper , hdb_scraper , station_scraper , park_scraper , mall_scraper , hawker_scraper
 
 def find_postal(lst, filename):  
     for index,add in enumerate(lst):
@@ -44,41 +44,41 @@ def find_nearest(house, amenity, radius=2):
         results[flat] = flat_amenity
     return results
 
-# find_postal(hdbScraper.get_hdb_list(), 'Data/Coordinates/hdb_coordinates')
+# find_postal(hdb_scraper.get_hdb_list(), 'Data/Coordinates/hdb_coordinates')
 
 def find_nearest_school_hdb():
-    nearest_school = find_nearest(hdbScraper.get_hdb_coordinates(), schoolScraper.get_school_coordinates())
+    nearest_school = find_nearest(hdb_scraper.get_hdb_coordinates(), school_scraper.get_school_coordinates())
     flat_top_school = pd.DataFrame.from_dict(nearest_school).T
     flat_top_school = flat_top_school.rename(columns={0: 'flat', 1: 'top_school', 2: 'top_school_dist', 3: 'num_top_school_2km'}).reset_index().drop(['index'], axis=1)
     flat_top_school.to_csv('Data/Flat_amenities/hdb_top_schools.csv' , index=False)
 
 def find_nearest_park_hdb():
-    nearest_park = find_nearest(hdbScraper.get_hdb_coordinates(), parkScraper.get_park_coordinates())
+    nearest_park = find_nearest(hdb_scraper.get_hdb_coordinates(), park_scraper.get_park_coordinates())
     flat_park = pd.DataFrame.from_dict(nearest_park).T
     flat_park = flat_park.rename(columns={0: 'flat', 1: 'park', 2: 'park_dist', 3: 'num_park_2km'}).reset_index().drop(['index'], axis=1)
     flat_park.to_csv('Data/Flat_amenities/hdb_park.csv' , index=False)
 
 def find_nearest_mall_hdb():
-    nearest_mall = find_nearest(hdbScraper.get_hdb_coordinates(), mallScraper.get_mall_coordinates())
+    nearest_mall = find_nearest(hdb_scraper.get_hdb_coordinates(), mall_scraper.get_mall_coordinates())
     flat_mall = pd.DataFrame.from_dict(nearest_mall).T
     flat_mall = flat_mall.rename(columns={0: 'flat', 1: 'mall', 2: 'mall_dist', 3: 'num_mall_2km'}).reset_index().drop(['index'], axis=1)
     flat_mall.to_csv('Data/Flat_amenities/hdb_mall.csv' , index=False)
 
 def find_nearest_hawker_hdb():
-    nearest_hawker = find_nearest(hdbScraper.get_hdb_coordinates(), hawkerScraper.get_hawker_coordinates())
+    nearest_hawker = find_nearest(hdb_scraper.get_hdb_coordinates(), hawker_scraper.get_hawker_coordinates())
     flat_hawker = pd.DataFrame.from_dict(nearest_hawker).T
     flat_hawker = flat_hawker.rename(columns={0: 'flat', 1: 'hawker', 2: 'hakwer_dist', 3: 'num_hawker_2km'}).reset_index().drop(['index'], axis=1)
     flat_hawker.to_csv('Data/Flat_amenities/hdb_hawker.csv', index=False)
 
 #for all stations including new plans
 def find_nearest_station_hdb_new():
-    nearest_station_new = find_nearest(hdbScraper.get_hdb_coordinates(), StationScraper.get_new_station_coordinates())
+    nearest_station_new = find_nearest(hdb_scraper.get_hdb_coordinates(), station_scraper.get_new_station_coordinates())
     flat_station_new= pd.DataFrame.from_dict(nearest_station_new).T
     flat_station_new = flat_station_new.rename(columns={0: 'flat', 1: 'station_name_2027_onwards', 2: 'station_dist_2027_onwards', 3: 'num_station_2km_2027_onwards'}).reset_index().drop(['index'], axis=1)
     flat_station_new.to_csv('Data/Flat_amenities/hdb_stations_new.csv' , index=False)
 
 def find_nearest_station_hdb_current():
-    nearest_station = find_nearest(hdbScraper.get_hdb_coordinates(), StationScraper.get_current_station_coordinates())
+    nearest_station = find_nearest(hdb_scraper.get_hdb_coordinates(), station_scraper.get_current_station_coordinates())
     flat_station_current = pd.DataFrame.from_dict(nearest_station).T
     flat_station_current = flat_station_current.rename(columns={0: 'flat', 1: 'station_name', 2: 'station_dist', 3: 'num_station_2km'}).reset_index().drop(['index'], axis=1)
     flat_station_current.to_csv('Data/Flat_amenities/hdb_stations_current.csv' , index=False)

@@ -1,5 +1,5 @@
 import pandas as pd
-import hdbScraper
+import hdb_scraper
 
 df1 = pd.read_csv('Data/2012_merged.csv')
 df2 = pd.read_csv('Data/Flat_amenities/final_amenities_merged.csv')
@@ -7,7 +7,7 @@ df2 = pd.read_csv('Data/Flat_amenities/final_amenities_merged.csv')
 #inserting price and town column
 town_column = df1.pop('town')
 price_column = df1.pop('resale_price')
-postal_column = hdbScraper.get_hdb_postal()
+postal_column = hdb_scraper.get_hdb_postal()
 df2.insert(0,'town',town_column)
 df2.insert(2,'postal',postal_column)
 df2['resale_price'] = price_column
